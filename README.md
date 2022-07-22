@@ -15,7 +15,7 @@ Yup, yet another icebreaker...but... we will try to make it painless and not awk
 This presentation provides a conceptual overview of reproducible research, particularly as it pertains to open science, and describes the core practices of reproducible research.
 
 - **GitHub Desktop**
-We briefly introduce the concept of version control as one core practice of reproducible research. The presentation will cover adding version control to the learning analytics workflow using [github.com](https://github.com/) and an application called Github Desktop. We will become familiar with navigating github.com and examining the file structures associated with repositories. 
+We briefly introduce the concept of version control as one core practice of reproducible research. The presentation will cover adding version control to the learning analytics workflow using [github.com](https://github.com/) and an application called Github Desktop. We will view the navigation of github.com and examining the file structures associated with repositories. However we are not using Github Desktop for our course due to time constraints.
 
 - **RStudio Desktop**
 We introduce the RStudio Desktop environment and how to get started with R. We will become familiar with the R environment, setting up global options, creating R scripts, and the basic grammar of the R programming language.
@@ -49,7 +49,7 @@ The transition to digital learning has made available new data sources, providin
 
 
 **TOPICS**
-Guided by our Text mining Case Study: Do the public like NGSS? We will investigate the public sentiment expressed toward the Next Generation Science Standards (NGSS) and compare the sentiment for NGSS and Common Core State Standards using Twitter data. This study is from Dr. Joshua Rosenberg's team (https://osf.io/xymsd/).
+Guided by our Text mining Case Study: Do the public like NGSS? We will investigate the public sentiment expressed toward the Next Generation Science Standards (NGSS) and compare the sentiment for NGSS and Common Core State Standards using Twitter data. This study is from [Dr. Joshua Rosenberg's team](https://osf.io/xymsd/).
 
 - **Text Mining Basics - Tidy Text & Word Counts**
 Following a gentle introduction to getting our text "tidy" so we can perform some basic word counts, look at words that occur at a higher rate in a group of documents, examine words that are unique to those document groups, and create visualizations such as word cloud.
