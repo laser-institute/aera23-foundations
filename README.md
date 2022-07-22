@@ -35,10 +35,9 @@ As a powerful approach to STEM education research LA can offer profound, sustain
 - **Learning Analytics (LA) Workflow**
 Krumm et al. (2018) postulate that "a workflow is a set of processes that transform inputs into outputs across multiple steps and decisions." The LA workflow supports *researchers, practitioners, and data scientists* preparing for data-intensive analysis and communicating one's findings through *Prepare, Wrangle, Explore, Model, and Communicate*.
 
-- **Data Visualizations as a means of storytelling**
+- **Data Visualizations as a means of storytelling with GGPLOT GRAMMAR and Graphs**
 What is visualization in the educational setting? How do visualizations bring attention to issues that must be addressed? 
 
-- **GGPLOT GRAMMAR and Graphs**
 The overview introduces and reviews some of the basic principles of data visualization as it relates to data graphics, including data visualization perception and color through storytelling.
 
  Using a hands-on, minds-on approach, we dive into the ggplot2 grammar in a simple-to-understand layering method. We will create static representations of numeric variables for some of the most popular geoms; histogram and scatter plots. Once we are comfortable with ggplot, we will introduce interactive visualization following a similar ggplot grammar. Grounded by a specific educational research question, the accompanying code-along focuses on the **EXPLORE** phase of LA.
