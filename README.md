@@ -23,7 +23,8 @@ We introduce the RStudio Desktop environment and how to get started with R. We w
 The accompanying code-along introduces basic programming concepts in R, such as using functions, proving arguments to functions, creating objects, and installing packages. Finally, we will learn how to knit RMarkdown files to produce readable, shareable versions of our work.
 
 
-## 🔉 Part Two - Foundations of Learning Analytics - focus on the "EXPLORE phase."
+## 🔉 Part Two - Foundations of Learning Analytics -
+### focus on the "EXPLORE phase."
 
 
 **TOPICS**
