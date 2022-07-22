@@ -67,6 +67,6 @@ The accompanying code-along introduces the concepts and techniques from the Text
 Having an opportunity to reflect and share out on how you may use some of these new concepts in your work. What are some other areas that you are interested in as it relates to Learning Analytics and its branches?
 
 - **Wrap-UP**
-What now? We will share resources, groups and other ways to connect with the Learnign Analytics community.
+What now? We will share resources, groups and other ways to connect with the Learning Analytics community.
 
 
