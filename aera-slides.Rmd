@@ -248,7 +248,7 @@ class: no-logo
 
 ---
 
-# RStudio Desktop Basics - Settings]
+# RStudio Desktop Basics - Settings
 
 .center[
 <img src="img/global-settings.png" height="425px"/>
@@ -574,73 +574,10 @@ ggplot(sci_data, aes(x = FinalGradeCEMS)) +
 ggplot(sci_data, aes(x = final_grade)) +
   geom_histogram(fill = "gray")
 ```
-
 ---
-class: clear, inverse, middle, center
-
-# {BREAK}
-----
-5-10 minutes - Coming up Foundations of LA
-
----
-
-
-
-
-
-
-class: clear, inverse, middle, center
-
-# Part 3: Wrapping Up
-----
-Knitting, Committing, and Sharing
-
----
-class: clear, no-logo, middle
-
-
-.center[<img src="img/github/commit-changes.png" height="600px"/>]
-
----
-class: clear, no-logo, middle
-
-
-.center[<img src="img/github/push-changes.png" height="600px"/>]
-
----
-class: clear, no-logo, middle
-
-
-.center[<img src="img/github/fork-repository.png" height="600px"/>]
-
----
-class: clear, no-logo, middle
-
-
-.center[<img src="img/github/own-purposes.png" height="600px"/>]
-
----
-class: clear, no-logo, middle
-
-
-.center[<img src="img/github/view-github.png" height="600px"/>]
-
----
-class: clear, no-logo, middle
-
-
-.center[<img src="img/github/github-pages.png" height="600px"/>]
-
----
-class: clear, no-logo, middle
-
-
-.center[<img src="img/github/github-pages-link.png" height="600px"/>]
----
-# What's Next
-
+# Resources
 .pull-left[
-## Essential Readings
+## Readings
 
 - [GitHub Glossary](https://docs.github.com/en/get-started/quickstart/github-glossary)  
 - [Git and GitHub Learning Resources](https://docs.github.com/en/get-started/quickstart/git-and-github-learning-resources)
@@ -648,10 +585,6 @@ class: clear, no-logo, middle
 - [Getting Started with R and RStudio](https://datascienceineducation.com/c05.html)
 
 - [Foundational Skills in R](https://datascienceineducation.com/c06.html)  
-
-
-
-
 
 
 ] 
@@ -662,10 +595,21 @@ class: clear, no-logo, middle
 - [Programing Basics](https://rstudio.cloud/learn/primers/1.2)
 
 - [GitHub Video Guides](https://www.youtube.com/githubguides)
-
-- [Your First LASER Badge!](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-1/pittinsky-class-friendships.pdf)
-
 ]
+
+---
+class: clear, inverse, middle, center
+
+# {BREAK}
+----
+5-10 minutes - Coming up Foundations of LA with GGplot
+
+---
+
+What do you think Learning Analytics is?
+
+
+
 
 ---
 class: clear, center
