@@ -51,10 +51,10 @@ The transition to digital learning has made available new data sources, providin
 **TOPICS**
 Guided by our Text mining Case Study: Do the public like NGSS? We will investigate the public sentiment expressed toward the Next Generation Science Standards (NGSS) and compare the sentiment for NGSS and Common Core State Standards using Twitter data. This study is from Dr. Joshua Rosenberg's team (https://osf.io/xymsd/).
 
-**Text Mining Basics - Tidy Text & Word Counts**
+- **Text Mining Basics - Tidy Text & Word Counts**
 Following a gentle introduction to getting our text "tidy" so we can perform some basic word counts, look at words that occur at a higher rate in a group of documents, examine words that are unique to those document groups, and create visualizations such as word cloud.
 
-**Dictionary-Methods - Twitter Sentiment and School Reform**
+- **Dictionary-Methods - Twitter Sentiment and School Reform**
 Moving beyond basic concepts of text mining and taking a closer look at a dictionary-based text mining technique, sentiment analysis. This technique is beneficial for us to understand people's opinions about things such as a policy.
 
 The accompanying code-along introduces the concepts and techniques from the Text Mining Basics and Dictionary Methods topics. Sprinkling many opportunities for open discussion and reflection on how these concepts and techniques might apply to your research.
