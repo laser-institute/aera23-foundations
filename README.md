@@ -23,14 +23,16 @@ The accompanying code-along introduces basic programming concepts in R, such as 
 **TOPICS**
 
 - **Learning Analytics**
-As a powerful approach to STEM education research that can offer deep, sustained, and systematic interrogation in societal decision making. 
+As a powerful approach to STEM education research that can offer deep, sustained, and systematic interrogation in societal decision making. For example, researchers and practitioners use LA to improve learning and teaching in K-12 with real-time Dashboards, in Higher Education Multimodal Learning Analytics study collaboration and self-regulation, Text Mining gives insight with sentiment analysis on educational reform, and Social Network analysis can help us to understand costudying relationships.
 
-- **Learning Analytics Workflow**
+- **Learning Analytics (LA) Workflow**
+Krumm et al. (2018) postulates "a workflow is a set of processes that transform inputs into outputs across multiple steps and decisions." The LA workflow is intended to support *researchers, practitioners, and data scientists* prepare for a data-intensive analysis and communicate one’s findings through *Prepare, Wrangle, Explore, Model and Communicate*.
 
 - **Data Visualizations as a means of story telling**
 What is visualization in the educational setting? How do visualizations bring attention to issues that must be addressed?
 
-- **GGPLOT GRAMMAR and graphs**
+- **GGPLOT GRAMMAR and Graphs**
+
 
 
 The accompanying code-along introduces 
