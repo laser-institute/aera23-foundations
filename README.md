@@ -1,11 +1,11 @@
 # AERA Short Course
 
-## Part One - Welcome and R Studio
+🔉 ## Part One - Welcome and R Studio
 Introduction to the concepts of open science and reproducible research for application to learning analytics using R and R Studio.
 
 But, first...
 
-**ICEBREAKER**
+🧊**ICEBREAKER**🧊
 Yup, yet another icebreaker...but... we will try to make it painless and not awkward. Let's get a little comfortable with the group and less stressed about starting a new programming language.
 
 
@@ -22,7 +22,9 @@ We introduce the RStudio Desktop environment and how to get started with R. We w
 
 The accompanying code-along introduces basic programming concepts in R, such as using functions, proving arguments to functions, creating objects, and installing packages. Finally, we will learn how to knit RMarkdown files to produce readable, shareable versions of our work.
 
-## Part Two - Foundations of Learning Analytics - focus on the "EXPLORE phase."
+
+🔉 ## Part Two - Foundations of Learning Analytics - focus on the "EXPLORE phase."
+
 
 **TOPICS**
 
@@ -40,9 +42,9 @@ The overview introduces and reviews some of the basic principles of data visuali
 
  Using a hands-on, minds-on approach, we dive into the ggplot2 grammar in a simple-to-understand layering method. We will create static representations of numeric variables for some of the most popular geoms; histogram and scatter plots. Once we are comfortable with ggplot, we will introduce interactive visualization following a similar ggplot grammar. Grounded by a specific educational research question, the accompanying code-along focuses on the **EXPLORE** phase of LA.
 
-## Part Three: Text Mining
-The transition to digital learning has made available new data sources, providing researchers new opportunities for understanding and improving STEM learning. Data sources such as digital learning environments and administrative data systems, as well as data produced by social media websites and the mass digitization of academic and practitioner publications, hold enormous potential to address a range of pressing problems in STEM Education, but collecting and analyzing text-based data also presents unique challenges.
 
+🔉 ## Part Three: Text Mining
+The transition to digital learning has made available new data sources, providing researchers new opportunities for understanding and improving STEM learning. Data sources such as digital learning environments and administrative data systems, as well as data produced by social media websites and the mass digitization of academic and practitioner publications, hold enormous potential to address a range of pressing problems in STEM Education, but collecting and analyzing text-based data also presents unique challenges.
 
 
 **TOPICS**
@@ -57,7 +59,8 @@ Moving beyond basic concepts of text mining and taking a closer look at a dictio
 The accompanying code-along introduces the concepts and techniques from the Text Mining Basics and Dictionary Methods topics. Sprinkling many opportunities for open discussion and reflection on how these concepts and techniques might apply to your research.
 
 
-## Part Four: Share out and Wrap up
+🔉 ## Part Four: Share out and Wrap up
+
 
 **TOPICS**
 
