@@ -48,6 +48,7 @@ The transition to digital learning has made available new data sources, providin
 
 
 **TOPICS**
+
 Guided by our Text mining Case Study: Do the public like NGSS? We will investigate the public sentiment expressed toward the Next Generation Science Standards (NGSS) and compare the sentiment for NGSS and Common Core State Standards using Twitter data. This study is from [Dr. Joshua Rosenberg's team](https://osf.io/xymsd/).
 
 - **Text Mining Basics - Tidy Text & Word Counts**
