@@ -1,6 +1,6 @@
 ---
   title: "Introduction to Data-Viz"
-  author: "Jeanne McClure, Jennifer Houchins"
+  author: "THe LASER Team"
   institute: "Instituttional Affiliation"
   date: '`r format(Sys.time(), "%B %d, %Y")`'
   output:
@@ -680,6 +680,3 @@ class: inverse, clear, center
 ## .font175[.center[Thank you! Any questions?]]
 
 
----
-
-<img src="img/team_2022.png" height="550px"/>
