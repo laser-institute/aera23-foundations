@@ -1,42 +1,64 @@
-<!DOCTYPE html>
-<html lang="" xml:lang="">
-  <head>
-    <title>AERA 23 Short Course</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="The LASER Team" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
-    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
-    <script src="libs/panelset-0.2.6/panelset.js"></script>
-    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
-    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
-    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
-    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"Press Ctrl+C to Copy"})</script>
-    <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-    <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
-    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
-    <link rel="stylesheet" href="css/laser.css" type="text/css" />
-    <link rel="stylesheet" href="css/laser-fonts.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-
+---
+title: "AERA 23 Short Course"
+subtitle: "Learning Analytics with R Studio"
+author: "The LASER Team"
+institute: "The LASER Institute"
+date: "2022/07/21 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    css:
+     - default
+     - css/laser.css
+     - css/laser-fonts.css
+    lib_dir: libs                        # creates directory for libraries
+    seal: false                          # false: custom title slide
+    nature:
+      highlightStyle: default         # highlighting syntax for code
+      highlightLines: true               # true: enables code line highlighting
+      highlightLanguage: ["r"]           # languages to highlight
+      countIncrementalSlides: false      # false: disables counting of incremental slides
+      ratio: "16:9"                      # 4:3 for standard size,16:9
+      slideNumberFormat: |
+       <div class="progress-bar-container">
+        <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+        </div>
+       </div>
+---
 class: clear, title-slide, inverse, center, top, middle
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
 
+```{r, echo=FALSE}
+# then load all the relevant packages
+pacman::p_load(pacman, knitr)
+```
 
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
 
+```{r xaringanExtra-clipboard, echo=FALSE}
+# these allow any code snippets to be copied to the clipboard so they 
+# can be pasted easily
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+```{r xaringan-extras, echo=FALSE}
+xaringanExtra::use_tile_view()
 
+```
 
-
-
-
-
-# AERA 23 Short Course
-## Learning Analytics with R Studio
-### The LASER Team
-### July 22, 2022
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$subtitle`
+### `r rmarkdown::metadata$author`
+### `r format(Sys.time(), "%B %d, %Y")`
 
 
 ---
@@ -57,18 +79,18 @@ class: clear, title-slide, inverse, center, top, middle
 
 .pull-left[
 Each topic (FS - DV and TM) consist of three progressively sequenced labs that include:
-- A Presentation &amp; Code-Along
+- A Presentation & Code-Along
 - Coding Case Study 
 - LASER Badge
 ]
 
 .pull-right[
-&lt;img src="img/learning-labs.png" height="350px"/&gt;
+<img src="img/learning-labs.png" height="350px"/>
 ]
 ---
 # ICEBREAKER
 
-&lt;img src="img/icebreaker.png" height="425px"/&gt;
+<img src="img/icebreaker.png" height="425px"/>
 
 ---
 
@@ -114,7 +136,7 @@ Additionally, we will briefly go over R syntax. But more on that when we get int
 class: clear, inverse, middle, center
 
 
-&lt;img src="img/cat.png" height="425px"/&gt;
+<img src="img/cat.png" height="425px"/>
 
 ---
 
@@ -143,12 +165,12 @@ Why Reproducibilty?
 class: clear, middle, no-logo
 
 .pull-left[.font200[
-&lt;br /&gt;
+<br />
 .orange[**Raise your hand if you're guilty of this...**]
 
 ]]
 
-.pull-right[&lt;img src="img/github/phdcomic.png" height="600px" style="margin-top: -20px; border: 5px solid #d34126;"/&gt;]
+.pull-right[<img src="img/github/phdcomic.png" height="600px" style="margin-top: -20px; border: 5px solid #d34126;"/>]
 
 ???
 
@@ -183,7 +205,7 @@ class: no-logo
 
 **Version control** is keeping a .orange[**history of a file's changes**].
 
-.center[&lt;img src="img/github/google-version-history.png" height="425px" style="margin-left: -40px; border: 3px solid #143156;"/&gt;]
+.center[<img src="img/github/google-version-history.png" height="425px" style="margin-left: -40px; border: 3px solid #143156;"/>]
 
 ???
 Chances are that you're already familiar with the concept of version control. If you've ever looked at the revision history of a Google doc, for example, then you have seen version control. 
@@ -213,7 +235,7 @@ class: no-logo
 # RStudio Desktop Basics - R Environment
 
 .center[
-&lt;img src="img/r_console.png" height="425px"/&gt;
+<img src="img/r_console.png" height="425px"/>
 ]
 
 ---
@@ -221,7 +243,7 @@ class: no-logo
 # RStudio Desktop Basics - Global Options
 
 .center[
-&lt;img src="img/global.png" height="425px"/&gt;
+<img src="img/global.png" height="425px"/>
 ]
 
 ---
@@ -229,7 +251,7 @@ class: no-logo
 # RStudio Desktop Basics - Settings
 
 .center[
-&lt;img src="img/global-settings.png" height="425px"/&gt;
+<img src="img/global-settings.png" height="425px"/>
 
 ---
 
@@ -237,30 +259,12 @@ class: no-logo
 
 .pull-left[
 Collections of R code that contain functions, data, and/or documentation.  
-
-```r
+```{r, echo=TRUE, eval=TRUE}
 # example of installing a package
 # install.packages("tidyverse")
 
 # example of loading a package
 library(tidyverse)
-```
-
-```
-## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-```
-
-```
-## ✔ ggplot2 3.3.5     ✔ purrr   0.3.4
-## ✔ tibble  3.1.6     ✔ dplyr   1.0.8
-## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-## ✔ readr   2.1.2     ✔ forcats 0.5.1
-```
-
-```
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
 ```
 ]
 
@@ -268,14 +272,14 @@ library(tidyverse)
 
 .center[Or just point and click... 
 
-&lt;img src="img/install-packages.png" height="350px"/&gt;
+<img src="img/install-packages.png" height="350px"/>
 ]]
 
 ---
 
 # RStudio Desktop Basics - New Script
 .center[
-&lt;img src="img/r_script.png" height="425px"/&gt;
+<img src="img/r_script.png" height="425px"/>
 ]
 
 
@@ -286,10 +290,10 @@ library(tidyverse)
 So this is an image of the R studio integrated development environment. You can see that there are these four main panels and if you're not seeing all four of those panels it's probably because something has been minimized and we can show you how to fix that here in person.
 
 The IDE four main areas
-- Console (&amp; Terminal)
+- Console (& Terminal)
 - Scripting and Viewing Window
 - Files/Plots/Packages/Help
-- Environment (&amp; Connections/Git)
+- Environment (& Connections/Git)
 
 **CONSOLE:**
 The console will show you what items have been run and any errors
@@ -320,15 +324,15 @@ We can use
 
 Let's set up our Global Options for a smooth workflow
 - In the menu bar click `Tools` then `Global Options.`
-    + 1. `R General` -&gt; (untick) Restore .RData into workspace at startup.
-    + 2. `R General` -&gt; Save workspace to .RData on exit: Never
-    + 3. `R Markdown` -&gt; Show output preview in: Viewer Pane
+    + 1. `R General` -> (untick) Restore .RData into workspace at startup.
+    + 2. `R General` -> Save workspace to .RData on exit: Never
+    + 3. `R Markdown` -> Show output preview in: Viewer Pane
 
 
 Today we will be working in a script file. A script is simply a text file containing a set of commands and comments. The script can be saved and used later to re-execute the saved commands
 
 To open a new script file 
-  + `file` -&gt; (click) `New file` -&gt; `script`
+  + `file` -> (click) `New file` -> `script`
   
 *HINT* - make sure to `save as` and save in your correct folder.
 
@@ -366,7 +370,7 @@ Similar to all languages, R syntax is composed of "parts of speech" that can be 
 - *Arguments* are the adverbs or the direct object
 	+ mean(student_grades, **na.rm = FALSE**)
 -	As in any sentence, there is also “punctuation” or *operators*
-  + average_grade **&lt;-** mean(student_grades, na.rm = FALSE)
+  + average_grade **<-** mean(student_grades, na.rm = FALSE)
 
 ???
 
@@ -380,7 +384,7 @@ Suppose you want to round a number, you would use round( ) and put the number in
 
 Objects: are everything you have in R - things that you save like data frames in tabular form. Think back when you have used excel and you had to save your spread sheet and name it. That is comparable to an object. 
 
-To save something into an object we need to use the assignment operator &lt;-.  The assignment operator is used for assignment operation. Operator that assigns a certain value to a variable and scope is within the function and outside as well. 
+To save something into an object we need to use the assignment operator <-.  The assignment operator is used for assignment operation. Operator that assigns a certain value to a variable and scope is within the function and outside as well. 
 
 
 We will save the number 20 to the word twenty. I could have easily called the new object any other name to save as the object. Then I can **call** the number by typing twenty in and running it.
@@ -404,7 +408,7 @@ So in this example, “digits = 1” is an argument that provides extra informat
 
 ---
 class: no-logo
-# Operators &amp; Objects
+# Operators & Objects
 
 ## Arithmetic
 
@@ -412,22 +416,20 @@ class: no-logo
 R is a calculator!
   
 Type this in your console:  
-
-```r
+```{r, echo = TRUE, eval = FALSE}
 2 + 3
 ```
   
 You'll get this: 
-
-```
-## [1] 5
+```{r, echo = FALSE}
+2 + 3
 ```
 ]
 
 .pull-right[
 .center[Arithmetic Operators 
 
-&lt;img src="img/arithmetic.png" height="350px"/&gt;
+<img src="img/arithmetic.png" height="350px"/>
 ]]
 
 ---
@@ -436,14 +438,12 @@ You'll get this:
 R is logical! 
   
 What happens when you run this?  
-
-```r
-5 &gt; 3
+```{r, echo=TRUE, eval = FALSE}
+5 > 3
 ```
   
 Or this?
-
-```r
+```{r, echo=TRUE, eval = FALSE}
 5 == 3
 ```
 
@@ -453,7 +453,7 @@ Why not just a single `=` operator?
 .pull-right[
 .center[Logical Operators 
 
-&lt;img src="img/logical.png" height="350px"/&gt;
+<img src="img/logical.png" height="350px"/>
 ]]
 
 ---
@@ -463,45 +463,34 @@ Why not just a single `=` operator?
 .pull-left[
 **Bad Form**
 
-
-```r
-*my_variable = 2 + 3
+```{r, echo=TRUE}
+my_variable = 2 + 3 #<<
 
 my_variable
-```
-
-```
-## [1] 5
 ```
 ]
 
 .pull-right[
 **Good Form**
 
-
-```r
-*my_cat &lt;- "Muffins"
+```{r, echo=TRUE}
+my_cat <- "Muffins" #<<
 
 my_cat
-```
-
-```
-## [1] "Muffins"
 ```
 ]
 ---
 # Pipes
 
-
-```r
-sci_data &lt;- read_csv("data/sci-online-classes.csv") |&gt; # read in data
-  select(student_id, FinalGradeCEMS, course_id, ) |&gt; # select variables
-  rename(final_grade = FinalGradeCEMS) |&gt; # rename FinalGradeCEMS
-  filter(final_grade &gt; .5) |&gt; # keep grades higher than 50% 
+```{r, echo=TRUE, message=FALSE, eval=TRUE}
+sci_data <- read_csv("data/sci-online-classes.csv") |> # read in data
+  select(student_id, FinalGradeCEMS, course_id, ) |> # select variables
+  rename(final_grade = FinalGradeCEMS) |> # rename FinalGradeCEMS
+  filter(final_grade > .5) |> # keep grades higher than 50% 
   drop_na() # remove rows with missing data
 ```
 
-Pipes are a very powerful tool for combining a sequence of functions or processes. The original pipe operator `%&gt;%` comes from the {magrittr} but pipe has become such a useful and much used operator in R that it is now baked into R with the new `|&gt;` operator. 
+Pipes are a very powerful tool for combining a sequence of functions or processes. The original pipe operator `%>%` comes from the {magrittr} but pipe has become such a useful and much used operator in R that it is now baked into R with the new `|>` operator. 
 
 ---
 #Data Frames
@@ -511,8 +500,7 @@ Objects are everywhere in R! In fact we already created a few.
 
 Let's look at the `sci_data` object we just created:
 
-
-```r
+```{r, echo=TRUE, eval = FALSE}
 sci_data
 ```
 
@@ -522,50 +510,39 @@ sci_data
 .pull-right[
 .center[
 
-
-```
-## # A tibble: 6 × 3
-##   student_id final_grade course_id    
-##        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;        
-## 1      43146        93.5 FrScA-S216-02
-## 2      44638        81.7 OcnA-S116-01 
-## 3      47448        88.5 FrScA-S216-01
-## 4      47979        81.9 OcnA-S216-01 
-## 5      48797        84   PhysA-S116-01
-## 6      52326        83.6 AnPhA-S216-01
+```{r, echo=FALSE, eval = TRUE}
+sci_data |>
+  head()
 ```
 ]]
 
 
 ---
-# Functions &amp; Arguments - Basic Template
+# Functions & Arguments - Basic Template
 
 Functions are pre-packaged pieces of code that (typically) start with a verb, followed by objects or inputs in parentheses called "arguments":
 
-
-```r
+```{r, echo=TRUE, eval = FALSE}
 do_this(to_this)  
 do_that(to_this, to_that, with_those)
 ```
 
 ---
-# Functions &amp; Arguments - Make One
+# Functions & Arguments - Make One
 
 Let's make a basic addition function called `add_numbers`: 
 
-
-```r
-add_numbers &lt;- function(number_1, number_2) {
+```{r, echo=TRUE, eval = TRUE}
+add_numbers <- function(number_1, number_2) {
     number_1 + number_2
 }
 ```
 
 ---
-# Functions &amp; Arguments - Your Turn
+# Functions & Arguments - Your Turn
 
 Use your new function to add 5 and 10:
-
-```r
+```{r, echo=TRUE}
 # YOUR CODE HERE
 # 
 #
@@ -573,33 +550,30 @@ Use your new function to add 5 and 10:
 
 
 ---
-# Functions &amp; Arguments - Solution
+# Functions & Arguments - Solution
 
 
-
-```r
+```{r, echo=TRUE, message=FALSE, eval=TRUE}
 add_numbers(5, 10)
-```
-
-```
-## [1] 15
 ```
 
 
 ---
-# Functions &amp; Arguments - Real World
+# Functions & Arguments - Real World
 
 .pull-left[
 In practice, most functions that we will be using this week take a data frame object as their first argument:
-
-```r
+```{r, echo=TRUE, message=FALSE, eval=FALSE}
 ggplot(sci_data, aes(x = FinalGradeCEMS)) +
   geom_histogram(fill = "blue")
 ```
 ]
 
 .pull-right[
-&lt;img src="aera-slides_files/figure-html/unnamed-chunk-17-1.png" height="350" /&gt;
+```{r, echo=FALSE, message=FALSE, eval=TRUE, out.height=350}
+ggplot(sci_data, aes(x = final_grade)) +
+  geom_histogram(fill = "gray")
+```
 ---
 # Resources
 .pull-left[
@@ -628,13 +602,11 @@ class: clear, inverse, middle, center
 
 # {BREAK}
 ----
-5-10 minutes - Coming up Foundations of LA with GGplot
+5-10 minutes - Coming up ....Foundations of LA with GGplot
 
 ---
 
 What do you think Learning Analytics is?
-
-
 
 
 ---
@@ -642,145 +614,6 @@ class: clear, center
 
 ## .font130[.center[**Thank you!**]]
 
-&lt;img src="img/team_2022.png" height="400px"/&gt;
+<img src="img/team_2022.png" height="400px"/>
 
 
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"highlightStyle": "default",
-"highlightLines": true,
-"highlightLanguage": "r",
-"countIncrementalSlides": false,
-"ratio": "16:9",
-"slideNumberFormat": "<div class=\"progress-bar-container\">\n <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n </div>\n</div>"
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>

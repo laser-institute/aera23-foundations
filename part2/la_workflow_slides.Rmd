@@ -1,0 +1,738 @@
+---
+  title: "Foundation lab 2 - Learning Analytics Workflow"
+  author: "Jeanne McClure, Jennifer Houchins"
+  institute: "Instituttional Affiliation"
+  date: '`r format(Sys.time(), "%B %d, %Y")`'
+  output:
+    xaringan::moon_reader:
+      css:
+       - default
+       - css/laser.css
+       - css/laser-fonts.css
+      lib_dir: libs                        # creates directory for libraries
+      seal: false                          # false: custom title slide
+      nature:
+        highlightStyle: default         # highlighting syntax for code
+        highlightLines: true               # true: enables code line highlighting
+        highlightLanguage: ["r"]           # languages to highlight
+        countIncrementalSlides: false      # false: disables counting of incremental slides
+        ratio: "16:9"                      # 4:3 for standard size,16:9
+        slideNumberFormat: |
+         <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+         </div>
+---
+class: clear, title-slide, inverse, center, top, middle
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE}
+# then load all the relevant packages
+pacman::p_load(pacman, knitr)
+```
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r xaringanExtra-clipboard, echo=FALSE}
+# these allow any code snippets to be copied to the clipboard so they 
+# can be pasted easily
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+```{r xaringan-extras, echo=FALSE}
+xaringanExtra::use_tile_view()
+
+```
+
+# `r rmarkdown::metadata$title`
+----
+### `r rmarkdown::metadata$author`
+### `r format(Sys.time(), "%B %d, %Y")`
+
+
+---
+# Recap from Data Structures Presentation
+
+--
+
+- Types of Data Used in LA (Sources)
+
+--
+
+- Characteristics of Data (Format)
+
+???
+
+Before we go on lets take just a few minutes, how are you all feeling so far?
+On a quick recap from our data structures presentation we discussed the different types of data found commonly in Learning Analytics. 
+
+**Types of Data** included:
+
+- Digital Learning Environments
+  + games 
+  + learning management systems
+  + Intelligent tutoring systems
+  + MOOCs
+- Administrative Data
+  + Student information Systems
+  + statewide longitudinal data systems
+- Sensors and Multimodal
+  + Sensors
+  + Speech and video analysis
+
+**Characteristics of Data** included:
+- Structured
+  + Quantitative and relational
+- Unstructured
+  + Qualitative in nature and un-relational
+- Semi-Structured
+  + Quantitative and Triangular
+- Meta-Data
++ Quantitative, data about data.
+
+
+  
+---
+# Learning Analytics Workflow Agenda
+
+
+.pull-left[**Part-1  Conceptual Overview**
+- Stages of the Workflow
+  + Prepare
+  + Wrangle
+  + Explore
+  + Model
+  + Communicate
+
+]
+
+.pull-right[**Part-2  Code-Along**
+- Common R-Markdown Syntax
+- Workflow 
+  + Prepare
+  + Wrangle
+
+]
+
+.footnote[Pre-Reading:
+[Learning Analytics Goes to School, (Ch. 2, pp. 41 - 34) By Andrew Krumm, Barbara Means, Marie Bienkowski](https://github.com/laser-institute/essential-readings/blob/main/foundation_labs/foundlab_1/krumm_2018.pdf)
+]
+---
+
+class: clear, inverse, middle, center
+
+Part 1:
+
+----
+
+Learning Analytics Workflow: Conceptual Overview
+
+---
+
+# Learning Analytics Workflow Cycle
+
+.panelset[
+
+.panel[.panel-name[Cycle]
+
+.pull-left[
+- Phases of the Workflow
+  + Prepare
+  + Wrangle
+  + Explore
+  + Model
+  + Communicate
+]
+
+.pull-right[
+<img src="img/la_wrkflow.png" height="350px"/>
+]
+]
+
+.panel[.panel-name[Prepare]
+.pull-left[
+- Stages of the Workflow
+  + Define and refine
+  + Identify
+  + Develop
+]
+
+.pull-right[
+<img src="img/prepare_wflow.png" height="250px"/>
+]
+]
+
+
+.panel[.panel-name[Wrangle]
+
+.pull-left[
+<img src="img/wrangling_steps.png" height="350px"/>
+]
+
+.pull-right[
+<img src="img/wrangle_wflow.png" height="250px"/>
+]
+]
+
+
+.panel[.panel-name[Explore]
+.pull-left[
+- Data Visualization
+- Feature Engineering
+]
+
+.pull-right[
+<img src="img/explore_wflow.png" height="250px"/>
+]
+]
+
+
+.panel[.panel-name[Model]
+.pull-left[
+<img src="img/modelphase_appr.png" height="350px"/>
+]
+
+.pull-right[
+<img src="img/model_wflow.png" height="250px"/>
+]
+]
+
+
+.panel[.panel-name[Communicate]
+
+.pull-left[
+
+- Select
+- Polish
+_ Narrate
+
+]
+
+.pull-right[
+<img src="img/communicate_wflow.png" height="250px"/>
+]
+]
+
+???
+
+**CYCLE-TAB**
+
+Krumm et al postulates "a workflow is a set of processes that transform inputs into outputs across multiple steps and decisions." 
+Documented from Guo, 2012; Wickham & Grolemund, 2017; and Marsh 2012, this generic workflow is intended to support *researchers, practitioners, and data scientists* prepare for a data-intensive analysis and communicate one’s findings.
+
+Over the next few code-along we will cycle through each of the processes highlighting common functions. 
+
+
+
+
+**PREPARE TAB**
+
+**Prepare** for a data-intensive analysis with clear and refined research questions with an understanding of where the data came from. 
+For example, Krumm et al uses the example surrounding an activity system for which the technology was used. 
+
+You may ask yourself - Is it for instructional, reward or even a social collaborative context? Having that understanding will allow for more refined understanding when formulating guiding research questions for the analysis. Identify what gets collected and stored by technology is important for the development of the research question.
+
+Here you may even refine your research question after having a better idea of where the data came from. The question may also be refined and redeveloped after you have started the data intensive analysis.
+
+The Learning Analysis Cycle is not a linear process but rather a process of phases that can be moved around.
+
+
+**WRANGLE  TAB**
+
+Wrangling or sometimes called "munging or pre-processing" entails the work of manipulating, cleaning, transforming, and merging data.
+- **manipulating** involves identifying, acquiring, and importing data into analysis software.
+
+- Wickham & Grolemund suggest cleaning data involves ensuring that each variable is in its own column, each observation is in its own row, and each value
+
+is in its own cell within a dataset.
+This is called Tidying your data and is part of the philosophy that informs the tidyvers suite.
+
+  + Krumm et al adds that **data cleaning** also involves identifying and remediating missing data, extreme values, and ensuring consistent use of identifier, key, or linking variables.
+-  transforming variables, such as recoding
+categorical variables and rescaling continuous variables.   
++ These types of transformations are the initial building blocks for **exploratory data analysis**
+
+-  One of the biggest value add ons is merging once disparate data sources.
+
+  + For example: merging data from a student information system that stores student grades with data from a digital learning environment that stores students’ longitudinal interactions can unlock what student do and do not do on a day to day basis.
+  
+  
+  
+
+**EXPLORE-TAB**
+
+In the reading Behren's asks 
+
+*How do we build rich mental models of the phenomena being examined?*
+
+Krumm et al explains the **explore phase** of the workflow is defined by discovering patterns in the data and graphically representing the variables.
+
+The exploratory data analysis phase includes:
+- Data visualization:
+This is where we
+  + Graphically represent one or more variables
+  + Allows for discovery of patterns in data and formation of mental models
+- Feature engineering
+  + Creating new variables within a data set
+    + Draws on:
+    + Knowledge from theory or practice
+    + Experience with a particular data system
+    + General experience in data-intensive research
+
+
+
+
+
+**MODEL-TAB**
+
+Really there could be a whole workshop on Modeling...this is really a condensed version.
+
+Modeling is used to develop a mathematical summary of relationships within a dataset. 
+It is an iterative process that involves building and evaluating the model.
+
+Two general models used - **Unsupervised** and **Supervised**.
+
+- Supervised learning
+  + uses inference and Predictive modeling
+    + these are similar but distinct where the researcher uses a model to interpret the relationships among features and an outcome (inference) or  whether a researcher uses a model to make predictions or classifications (prediction).
+    + Inference involves paying particular attention to the specific relationships between features and an outcome.
+    + prediction relies on a known outcome where the ultimate task of a researcher is to find the right combination of features and an algorithm to predict or classify unseen data.
+  + Quantifies relationships between features and a known outcome
+  + Classification - model categorical outcomes when variables are categorical. (e.g., yes or no outcomes)
+  + Regression - characterize continuous outcomes. When the known outcome is numeric and continuous in
+nature, such as a test score, then this learning task is referred to as regression (e.g., test scores)
+  + Supervised learning models are different in
+that they can be used to quantify relationships between features and a known outcome p.46.
+  + Known outcomes are also commonly referred to as labels or dependent variables.
+    + include longer-term results, like dropping out of school or short term results - like being off task.
+  + Features used in a supervised learning model can also be referred to as predictors or regressors.
+  + The types of algorithms are boundless from linear models, decision trees, support vector machines, and k-nearest neighbors
+
+- Unsupervised learning
+  + Exploratory
+  + Also called, structure discovery, algorithms are useful for understanding relationships among features in a dataset.
+  + Unsupervised data or structured discovery cannot be easily evaluated against a ground truth, or known outcome.
+  + Structure discovery helps in identifying patterns within one’s data or reducing the overall dimensionality in one’s data when the model is not being trained against a known outcome.Can add new features from this discovery.
+    + Using K-means and hierarchical cluster algorithms to group observations within one’s datasets as well as principal components and factor analysis to reduce the dimensionality in one’s dataset.
+
+It is not uncommon that one will use multiple structure discovery, inference, and prediction methods in one project.
+
+
+
+**COMMUNICATE TAB**
+As was mentioned in the orientation lab communication should not be an afterthought and should be continuous throughout the workflow project according to principles of reproducible research.
+
+Here in the final phase is where you communicate your findings to stakeholders. Stakeholders interest may only be in the findings and call to action. 
+
+Within communication you will use select, polish and narrate flow.
+
+1.  **Select.** Communicating what one has learned involves selecting among those analyses that are most important and most useful to an intended audience, as well as selecting a form for displaying that information, such as a graph or table in static or interactive form,
+    i.e. a "data product."
+
+2.  **Polish**. After creating initial versions of data products, research teams often spend time refining or polishing them, by adding or editing titles, labels, and notations and by working with colors and shapes to highlight key points.
+
+3.  **Narrate.** Writing a narrative to accompany the data products involves, at a minimum, pairing a data product with its related research question, describing how best to interpret the data product, and explaining the ways in which the data product helps answer the research question.
+
+
+]
+---
+
+class: clear, inverse, middle, center
+Part 2:
+
+----
+
+Code-Along
+
+
+---
+
+# R Markdown Syntax
+
+.panelset[
+
+.panel[.panel-name[Global Options]
+
+.pull-left[
+ - 1. `R General` -> (untick) Restore .RData into workspace at startup.
+ - 2. `R General` -> Save workspace to .RData on exit: Never
+ - 3. `R Markdown` -> Show output preview in: Viewer Pane
+    ]
+
+.pull-right[
+<img src="img/global.png" height="425px"/>
+]
+
+]
+
+
+
+.panel[.panel-name[YAML Header]
+.pull-left[
+
+Check out this site on[Yaml heading](https://zsmith27.github.io/rmarkdown_crash-course/lesson-4-yaml-headers.html) 
+- "Title"
+- "Author"
+- "Date" 
+- Output:
+    + HTML
+    + toc
+    + theme
+
+]
+
+.pull-right[
+<img src="img/yaml.png" height="425px"/>
+]
+
+]
+
+
+
+.panel[.panel-name[Headers]
+
+    + # One
+    + ## Two
+    + ### Three
+    + #### Four
+    + ##### Five
+
+
+
+]
+
+
+.panel[.panel-name[Knit]
+
+.center[
+<img src="img/knit_button.png" height="425px"/>
+]
+]
+
+
+.panel[.panel-name[Code-chunk]
+
+.pull-left[
+
+1. Menu Bar > 'Code' > 'insert chunk'
+
+2. Add a code chunk by holding down `Ctrl` + `Alt` + `I`
+]
+
+.pull-right[
+<img src="img/code_chunk.png" height="425px"/>
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+]
+
+]
+???
+
+**GLOBAL OPTIONS TAB**
+
+If you haven't already we will set up our Global options so that we have a better workflow. 
+
+First, Go to the Global options from Tools.
+Tools > Global Options > R General > (untick) Restore .RData into workspace at startup.
+
+Second,  > R General > Change Save workspace to .RData on exit: to Never
+
+Third, > In R Markdown Change the drop down in Show output preview in: Viewer Pane so that you can see the slides.
+
+Click Apply and Save.
+
+
+**YAML HEADER TAB**
+In the yaml heading you will see an author, co author, date set to current date, you can also set that tho what ever date you want and an output. 
+Outputs can change depending on what type of publication you are producing. We will learn more about this in Foundation lab 4.
+I've included a link to learn more about yaml heading on your own time.
+
+
+
+**HEADERS TAB**
+
+To create headers you use the hashtag. The more hashtags you use the smaller your heading font.
+
+
+
+**KNIT TAB**
+Let's go ahead and knit so that we can see the headings.
+Just click on the ball of yarn with kneedles.
+
+You can also view your document in script or visual editor.
+
+To view in visual editor on desktop click on the gear and then visual editor, you can toggle back and forth.
+
+
+
+
+**CODE-CHUNK TAB**
+
+To add a Code chunk press `Ctrl` + `Alt` + `I` at the same time or from the tool bar menu 'Code' > 'insert chunk'
+
+add here to run you can click the green arrow, sun everything above by clicking the run above arrow . or to run the chuc=nck you can use the hot keys `ctrl` `enter`.
+
+]
+---
+# Workflow 
+.panelset[
+
+.panel[.panel-name[Workflow]
+
+<img src="img/la_wrkflow.png" height="400px"/>
+
+
+]
+
+.panel[.panel-name[PREPARE]
+
+
+To help us import our data, we'll be using two packages:
+{[readr](https://readr.tidyverse.org)} and
+{[here](https://here.r-lib.org)} .
+
+]
+
+
+.panel[.panel-name[WRANGLE]
+
+1. **Import**
+2. **Tidy**
+3. **Join**
+
+
+]
+
+
+.panel[.panel-name[Import]
+
+```{r echo =TRUE, warning=FALSE, message=FALSE}
+
+#load Library
+library(tidyverse)
+library(here)
+#load with read_csv package
+time_spent <- read_csv("~/RProj22/foundation_labs_2022/foundation_lab_2/data/log-data.csv")#<<
+
+#load with here package
+time_spent <- read_csv(here(
+  "data", "log-data.csv"))#<<
+```
+
+]
+
+
+.panel[.panel-name[Tidy]
+
+.center[
+<img src="img/dplyr.png" height="425px"/>
+]
+
+
+]
+
+
+.panel[.panel-name[Join]
+
+.center[
+<img src="img/join.png" height="425px"/>
+]
+
+
+]
+]
+
+???
+**WORKFLOW TAB**
+
+Again this is the general workflow. It is not a linear process and can flow to answer your research questions, or revise them depending on your needs. The next few sessions will take us through the entire workflow. 
+
+1.  **Prepare**: Prior to analysis, it's critical to understand the context and data sources you're working with so you can formulate useful and answerable        questions. You'll also need to become familiar with and load essential packages for analysis.
+
+2.  **Wrangle**: Wrangling data entails the work of manipulating, cleaning, transforming, and merging data. 
+
+3.  **Explore**: In Part 3, we use basic data visualization and calculate some summary statistics to explore our data and see what insight it provides in response to our question.
+
+4.  **Model:** After identifying variable that may be related to student performance through exploratory analysis, we'll look at correlations and create some simple models of our data using linear regression.
+
+5.  **Communicate:** To wrap up our case study, we'll develop our first "data product" and share our analyses and findings by creating our first web page using R Markdown.
+
+Additionally you may add a section 0. that offers insight into a case study, research questions, and the reason for your analysis. What sparked you to collect data on this particular topic? What's the background?
+
+Today we will focus on the *Prepare* and *Wrangle* phases.
+
+
+
+**PREPARE TAB**
+In this part of the workflow, **Prepare**, load your libraries. If this is the first time using the library then you will need to install first using the 'install.packages("")' function before using the `library()` function.
+
+
+
+**WRANGLE TAB**
+About 45% of your time is spent in cleaning the data.
+
+In general, data wrangling involves some combination of cleaning, reshaping, transforming, and merging data (Wickham & Grolemund, 2017). The importance of data wrangling is difficult to overstate, as it involves the initial steps of going from raw data to a dataset that can be explored and modeled (Krumm et al, 2018). 
+
+In the wrangle section we are going to:
+
+a.  **Import Data**. In this section, we introduce the `read_csv()` function for working with CSV files and revisit some key functions for inspecting our data.
+
+b.  **Tidy Data**. We introduce the `separate()` and `clean_names()` functions for getting our data nice and tidy, and revisit the `mutate()` for creating new variables.
+
+c.  **Join Data**. We conclude our data wrangling by introducing  a`join()` function for merging our processed files into a single data frame for analysis.
+
+
+
+**IMPORT TAB**
+
+Education data are stored in all sorts of different file formats and structures. Here, we'll focus on working with Comma-separated values (CSV) files.
+
+We learned in Foundation lab 2, similar to spreadsheet formats Excel and Google Sheets, CSVs allow us to store rectangular data frames, but in a much simpler plain-text format, where all the important information in the file is represented by text. Note that "text" here refers to numbers, letters, and symbols you can type on your keyboard. 
+
+In Tidyverse Skills for Data Science, Wright et al. (2021), note that the advantage of CSVs is that there are no workbooks or metadata making it difficult to open these files. CSVs are flexible files and are thus the preferred storage method for tabular data for many data scientists .
+
+We are going to load two more sets of data one for academic achievement and the other for survey data.
+
+
+
+
+
+**TIDY TAB**
+
+There are a lot of functions in dplyr that help you to solve specific problems We will be using the seperate and mutate functions. 
+
+1. we will load `time_spent` and run the `separate()` function with
+the `course_id` variable to split up the subject, semester, and section
+so we can use them later on. In other words, whereas above we separated
+the variable `course_variable`, in the data set we'll use here, we'll
+separate the `course_id` variable.
+
+Once we've processed the data how we
+would like, we have to assign, or save, the results back to the name for
+the data with which we have been working. This is done with the
+assignment operator, or the \<- symbol.
+
+2. We'll use
+`mutate()` to create a new variable for the percentage of points each
+student earned; keep in mind as you work through these steps how so many
+parts of wrangling data involves either changing a variable or creating
+a new one. For these purposes, mutate can be very helpful. 
+
+Let's process `time_spent` variable that is in number of *minutes* that students spent on the
+course LMS. We will change it to
+`time_spent_hours`, that represents the number of *hours* that students spent on the course LMS.
+
+We will also process gradebook data and 
+
+Survey data - which we will use a new package called janitor. 
+Let's look at the survey data again. We notice that the data You may noticed that `student_ID` is not formatted the same as `student_id` in our other files. This is important because in the next section when were "join," or merge, our data files, these variables will
+need to have identical names.
+
+Fortunately the
+{[janitor](https://garthtarr.github.io/meatR/janitor.html)} package hassimple functions for examining and cleaning dirty data. It was builtwith beginning and intermediate R users in mind and is optimized foruser-friendliness. There is also a handy function called `clean_names()`in the {janitor} package for standardizing variable names.
+
+
+
+
+
+**JOIN TAB**
+Next, we will join the data together. There are many different join functions that can be used to join data sets.
+
+You may already be aware that your single
+analysis involves multiple data files.
+
+While in some cases it is
+possible to analyze each data set individually, it is often useful (or
+necessary, depending upon your goal) to join these sources of data
+together. This is especially the case for learning analytics research,
+in which researchers and analysts often are interested in understanding
+teaching and learning through the lens of multiple data sources,
+including digital data, institutional records, and survey data, among
+other sources. In all of these cases, knowing how to promptly join
+together files---even files with tens of thousands of hundreds of
+thousands of rows---can be empowering.
+
+A key (pun intended) with joins is to consider what variable(s) will
+serve as the *key*. This is the variable to join by.
+
+A key must have two characteristics; it is:
+
+-   a character string--- a word (thus, you cannot join on a number
+    unless you "coerce" or change it to be a character string, first)
+
+-   present in both of the data frames you are joining.
+
+To join two datasets, it is important that the *key* (or *keys*) on
+which you are joining the data is formatted identically. The key
+represents an identifier that is present in both of the data sets you
+are joining. For instance, you may have data collected from (or created
+about) the same students that are from two very different sources, such
+as a self-report survey of students and their teacher-assigned grades in
+class.
+
+While some of the time it takes some thought to determine what the key
+is (or what the keys are---you can join on multiple keys!), you need just one variable that meets both of the above
+characteristics.
+
+We're going to use a single join function, `full_join()`. In
+the code below, join `gradebook` and `time_spent`; type the names of
+those two data frames as arguments to the `full_join()` function in a
+similar manner as in the `full_join()` code above, and then run this
+code chunk. For now, don't specify anything for the `by =` part of the
+function.
+
+You may notice a message in the console or first output box above that
+says `Joining, by = c("student_id", "Course", "Subject", "Section")`.
+This is telling us that these files are being joined on the basis of all
+four of these variables matching in both data sets; in other words, for
+rows to be joined, they must match identically on all four of these
+variables.
+
+
+For more on joins:
+<https://statisticsglobe.com/r-dplyr-join-inner-left-right-full-semi-anti>
+
+GREAT job on wrangling your data!
+
+]
+
+
+---
+
+class: inverse, clear, center
+
+## .font130[.pull-left[**What's next?**]]
+
+<br/><br/><br/><br/><br/>
+
+.pull-left-wide[.left[.font100[
+-  Make sure to complete the R Programming primers:  [Tidy your Data](https://rstudio.cloud/learn/primers/4)
+
+-  Complete the badge requirement document from your lab 2 folder [foudationlab2_badge - Data Sources](https://github.com/laser-institute/foundational-skills/blob/master/foundation_lab_2/foundationlab2_badge.Rmd).
+]]
+]
+
+## .font175[.center[Thank you! Any questions?]]
+
+
+
+---
+
+<img src="img/team_2022.png" height="550px"/>
