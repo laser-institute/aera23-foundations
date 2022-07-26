@@ -1,11 +1,11 @@
 <img src="img/wrkflo_badge.png" width="40%"/>
 
 
-### **Foundation lab 2** - Learning Analytics Workflow
+### **Part 2** - Learning Analytics Workflow
 
-**Required Pre-Reading:**
+**References:**
 
-1. [Learning Analytics Goes to School, (Ch. 2, pp. 28 - 33) By Andrew Krumm, Barbara Means, Marie Bienkowski](https://github.com/laser-institute/essential-readings/blob/main/foundation_labs/foundlab_1/krumm_2018.pdf)
+1. [Learning Analytics Goes to School, (Ch. 2, pp. 28 - 33) By Andrew Krumm, Barbara Means, Marie Bienkowski]
 2. [R for Data Science. (CH. 9) by Hadley Wickham & Garrett Grolemund](https://r4ds.had.co.nz/index.html)
 
 

@@ -1,6 +1,6 @@
 ---
   title: "Foundation lab 2 - Learning Analytics Workflow"
-  author: "Jeanne McClure, Jennifer Houchins"
+  author: "The LASER Team"
   institute: "Instituttional Affiliation"
   date: '`r format(Sys.time(), "%B %d, %Y")`'
   output:
@@ -733,6 +733,3 @@ class: inverse, clear, center
 
 
 
----
-
-<img src="img/team_2022.png" height="550px"/>
