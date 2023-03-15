@@ -1,0 +1,233 @@
+---
+title: "Learning Analytics with Posit" 
+subtitle: "AERA 23 Short Course"
+author: "The LASER Team"
+format:
+  revealjs: 
+    slide-number: true
+    progress: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: img/LASERlogo_large.png
+    theme: [default, css/laser.scss]
+    footer: <a href=https://www.fi.ncsu.edu/projects/laser-institute>LASER Institute
+resources:
+  - demo.pdf
+---
+
+## Today's Agenda
+
+1. Intro and Icebreaker (20 mins)
+
+2. The Learning Analytics Workflow (10 mins)
+
+3. Getting Started Walkthrough (50 mins)
+
+4. Break before Part 2 on Data Sources (10 mins)
+
+
+## ICEBREAKER
+
+<img src="img/icebreaker.png" height="425px"/>
+
+
+# Learning Analytics Workflow {background="#143156"}
+
+
+## Phases of the Workflow
+
+:::{.columns}
+:::{.column width="40%"}
+<br />
+
+- Prepare
+- Wrangle
+- Explore
+- Model
+- Communicate
+:::
+
+:::{.column width="60%"}
+<img src="img/la_wrkflow.png" height="350px"/>
+:::
+:::
+
+:::{.notes}
+Krumm et al postulates "a workflow is a set of processes that transform inputs into outputs across multiple steps and decisions." 
+Documented from Guo, 2012; Wickham & Grolemund, 2017; and Marsh 2012, this generic workflow is intended to support *researchers, practitioners, and data scientists* prepare for a data-intensive analysis and communicate one’s findings.
+
+Over the next few code-along we will cycle through each of the processes highlighting common functions. 
+:::
+
+## Prepare
+
+:::{.columns}
+:::{.column width="40%"}
+<br />
+
+- Define and refine
+- Identify
+- Develop
+:::
+
+:::{.column width="60%"}
+<img src="img/prepare_wflow.png" height="350px"/>
+:::
+:::
+
+:::{.notes}
+**Prepare** for a data-intensive analysis with clear and refined research questions with an understanding of where the data came from. 
+For example, Krumm et al uses the example surrounding an activity system for which the technology was used. 
+
+You may ask yourself - Is it for instructional, reward or even a social collaborative context? Having that understanding will allow for more refined understanding when formulating guiding research questions for the analysis. Identify what gets collected and stored by technology is important for the development of the research question.
+
+Here you may even refine your research question after having a better idea of where the data came from. The question may also be refined and redeveloped after you have started the data intensive analysis.
+
+The Learning Analysis Cycle is not a linear process but rather a process of phases that can be moved around.
+:::
+
+## Wrangle
+
+:::{.columns}
+:::{.column width="40%"}
+<img src="img/wrangling_steps.png" height="350px"/>
+:::
+
+:::{.column width="60%"}
+<img src="img/wrangle_wflow.png" height="350px"/>
+:::
+:::
+
+:::{.notes}
+Wrangling or sometimes called "munging or pre-processing" entails the work of manipulating, cleaning, transforming, and merging data.
+- **manipulating** involves identifying, acquiring, and importing data into analysis software.
+
+- Wickham & Grolemund suggest cleaning data involves ensuring that each variable is in its own column, each observation is in its own row, and each value
+
+is in its own cell within a dataset.
+This is called Tidying your data and is part of the philosophy that informs the tidyvers suite.
+
+  + Krumm et al adds that **data cleaning** also involves identifying and remediating missing data, extreme values, and ensuring consistent use of identifier, key, or linking variables.
+-  transforming variables, such as recoding
+categorical variables and rescaling continuous variables.   
++ These types of transformations are the initial building blocks for **exploratory data analysis**
+
+-  One of the biggest value add ons is merging once disparate data sources.
+
+  + For example: merging data from a student information system that stores student grades with data from a digital learning environment that stores students’ longitudinal interactions can unlock what student do and do not do on a day to day basis.
+:::
+
+## Explore
+
+:::{.columns}
+:::{.column width="40%"}
+<br />
+
+- Data Visualization
+- Feature Engineering
+:::
+
+:::{.column width="60%"}
+<img src="img/explore_wflow.png" height="350px"/>
+:::
+:::
+
+:::{.notes}
+In the reading Behren's asks 
+
+*How do we build rich mental models of the phenomena being examined?*
+
+Krumm et al explains the **explore phase** of the workflow is defined by discovering patterns in the data and graphically representing the variables.
+
+The exploratory data analysis phase includes:
+- Data visualization:
+This is where we
+  + Graphically represent one or more variables
+  + Allows for discovery of patterns in data and formation of mental models
+- Feature engineering
+  + Creating new variables within a data set
+    + Draws on:
+    + Knowledge from theory or practice
+    + Experience with a particular data system
+    + General experience in data-intensive research
+:::
+
+## Model
+
+:::{.columns}
+:::{.column width="40%"}
+<img src="img/modelphase_appr.png" height="400px"/>
+:::
+
+:::{.column width="60%"}
+<img src="img/model_wflow.png" height="350px"/>
+:::
+:::
+
+:::{.notes}
+Really there could be a whole workshop on Modeling...this is really a condensed version.
+
+Modeling is used to develop a mathematical summary of relationships within a dataset. 
+It is an iterative process that involves building and evaluating the model.
+
+Two general models used - **Unsupervised** and **Supervised**.
+
+- Supervised learning
+  + uses inference and Predictive modeling
+    + these are similar but distinct where the researcher uses a model to interpret the relationships among features and an outcome (inference) or  whether a researcher uses a model to make predictions or classifications (prediction).
+    + Inference involves paying particular attention to the specific relationships between features and an outcome.
+    + prediction relies on a known outcome where the ultimate task of a researcher is to find the right combination of features and an algorithm to predict or classify unseen data.
+  + Quantifies relationships between features and a known outcome
+  + Classification - model categorical outcomes when variables are categorical. (e.g., yes or no outcomes)
+  + Regression - characterize continuous outcomes. When the known outcome is numeric and continuous in
+nature, such as a test score, then this learning task is referred to as regression (e.g., test scores)
+  + Supervised learning models are different in
+that they can be used to quantify relationships between features and a known outcome p.46.
+  + Known outcomes are also commonly referred to as labels or dependent variables.
+    + include longer-term results, like dropping out of school or short term results - like being off task.
+  + Features used in a supervised learning model can also be referred to as predictors or regressors.
+  + The types of algorithms are boundless from linear models, decision trees, support vector machines, and k-nearest neighbors
+
+- Unsupervised learning
+  + Exploratory
+  + Also called, structure discovery, algorithms are useful for understanding relationships among features in a dataset.
+  + Unsupervised data or structured discovery cannot be easily evaluated against a ground truth, or known outcome.
+  + Structure discovery helps in identifying patterns within one’s data or reducing the overall dimensionality in one’s data when the model is not being trained against a known outcome.Can add new features from this discovery.
+    + Using K-means and hierarchical cluster algorithms to group observations within one’s datasets as well as principal components and factor analysis to reduce the dimensionality in one’s dataset.
+
+It is not uncommon that one will use multiple structure discovery, inference, and prediction methods in one project.
+:::
+
+## Communicate
+
+:::{.columns}
+:::{.column width="40%"}
+<br />
+
+- Select
+- Polish
+- Narrate
+
+:::
+
+:::{.column width="60%"}
+<img src="img/communicate_wflow.png" height="350px"/>
+:::
+:::
+
+:::{.notes}
+
+As was mentioned in the orientation lab communication should not be an afterthought and should be continuous throughout the workflow project according to principles of reproducible research.
+
+Here in the final phase is where you communicate your findings to stakeholders. Stakeholders interest may only be in the findings and call to action. 
+
+Within communication you will use select, polish and narrate flow.
+
+1.  **Select.** Communicating what one has learned involves selecting among those analyses that are most important and most useful to an intended audience, as well as selecting a form for displaying that information, such as a graph or table in static or interactive form,
+    i.e. a "data product."
+
+2.  **Polish**. After creating initial versions of data products, research teams often spend time refining or polishing them, by adding or editing titles, labels, and notations and by working with colors and shapes to highlight key points.
+
+3.  **Narrate.** Writing a narrative to accompany the data products involves, at a minimum, pairing a data product with its related research question, describing how best to interpret the data product, and explaining the ways in which the data product helps answer the research question.
+:::
