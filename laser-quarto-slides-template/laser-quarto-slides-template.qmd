@@ -11,6 +11,9 @@ format:
     preview-links: auto
     logo: img/LASERlogo_large.png
     theme: [default, css/laser.scss]
+    width: 1920
+    height: 1080
+    margin: 0.05
     footer: <a href=https://www.fi.ncsu.edu/projects/laser-institute>LASER Institute
 resources:
   - demo.pdf
