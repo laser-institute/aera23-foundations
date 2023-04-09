@@ -16,9 +16,12 @@ $presentation-heading-font: 'Open Sans','Roboto', sans-serif !default;
 $presentation-heading-color: #8f303b !default;
 
 /*-- scss:rules --*/
+.reveal .slide {
+  margin: 10px;
+}
 
 .reveal a {
-  line-height: 1.3em;
+  line-height: 1em;
   color: #d34126;
 }
 
@@ -28,6 +31,11 @@ $presentation-heading-color: #8f303b !default;
 
 .reveal .footer a {
   color: #d34126;
+}
+
+.reveal h2 {
+  font-size: 1.4em;
+  margin-bottom: 50px;
 }
 
 section.has-dark-background code{
