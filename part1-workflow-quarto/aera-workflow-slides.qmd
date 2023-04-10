@@ -11,6 +11,9 @@ format:
     preview-links: auto
     logo: img/LASERlogo_large.png
     theme: [default, css/laser.scss]
+    width: 1920
+    height: 1080
+    margin: 0.05
     footer: <a href=https://www.fi.ncsu.edu/projects/laser-institute>LASER Institute
 resources:
   - demo.pdf
@@ -22,7 +25,7 @@ resources:
 
 2. The Learning Analytics Workflow (10 mins)
 
-3. Getting Started Walkthrough (50 mins)
+3. Getting Started Code-along (50 mins)
 
 4. Break before Part 2 on Data Sources (10 mins)
 
