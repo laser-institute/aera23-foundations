@@ -1,0 +1,90 @@
+---
+title: "Do LWIC summary variables (authentic, clout, etc.) vary across academic subjects?"
+output:
+  flexdashboard::flex_dashboard:
+    theme: 
+      version: 4
+      bootswatch: pulse
+    source_code: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(janitor)
+
+course_data <- read_csv("data/course-data.csv") |>
+  clean_names()
+
+liwc_data <- read_csv("data/liwc-data.csv") |>
+  clean_names()
+
+unit_3_joined_data <- inner_join(course_data, liwc_data)
+
+unit_3_joined_data <- unit_3_joined_data |>
+  select(course_id, 
+         gender,
+         tone,
+         authentic,
+         clout,
+         analytic) |>
+  separate(course_id, c("subject", "semester", "section")) |>
+  mutate(subject = recode(subject, 
+                          "AnPhA" = "Anatomy",
+                          "BioA" = "Biology", 
+                          "FrScA" = "Forensics", 
+                          "OcnA" =  "Oceanography", 
+                          "PhysA" = "Physics"))
+```
+
+## Inputs {.sidebar data-width="350"}
+
+The LWIC summary variables are emotional tone, clout, authenticity, and analytical thinking (I found this link helpful for describing each variable: https://www.liwc.app/help/liwc). Based on my own experiences with different courses, I hypothesized that students' writing might vary across different academic subjects which would be reflected by variation in the summary variables. I visualized the data by organizing it into a boxplot for each summary variable that would show the distribution of that variable's scores within a particular academic subject.
+
+The results were interesting, in that patterns were not consistent across all the summary variables. Emotional tone displayed the most closely aligned values across academic subjects. For example, students used positive emotional tone in their writing for more than 55% of their posts across all subjects, with the lowest median (Anatomy) located within 10 points below the highest median (Physics). Students in Forensics used similar emotional tone across their writing, as demonstrated by the short length of the Forensics boxplot, while Oceanography had a much wider boxplot indicating that students were less uniform in their emotional tone.
+
+Clout, authenticity, and analytical thinking varied a little bit more across academic subjects, particularly when studying the size of the boxplots themselves. Analytical thinking is an interesting example to look at here - both Physics and Anatomy seems to have roughly the same median (\~60) although the 1st and 3rd quartiles for Physics are slightly farther apart, indicating a wider distribution of scores. Biology's boxplot is located significantly lower than the others, with a median of around 40 and a significantly larger distance beneath the median than above it. This implies that the writing from Biology students demonstrated weaker evidence of analytical thinking than the writing from other subjects.
+
+## Column {data-width="400"}
+
+### Relationship Between Academic Subject and Emotional Tone
+
+```{r}
+unit_3_joined_data  %>% 
+ ggplot() +
+    geom_boxplot(mapping = aes(x = subject, y = tone, fill = subject)) +
+    theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(),) +
+    labs(x = element_blank(), y = "Emotional Tone (Higher Value = More Positive)")
+```
+
+### Relationship Between Academic Subject and Authenticity
+
+```{r}
+unit_3_joined_data  %>% 
+ ggplot() +
+    geom_boxplot(mapping = aes(x = subject, y = authentic, fill = subject)) +
+    theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(),) +
+    labs(x = element_blank(), y = "Authenticity")
+```
+
+## Column {data-width="400"}
+
+### Relationship Between Academic Subject and Clout
+
+```{r}
+unit_3_joined_data  %>% 
+ ggplot() +
+    geom_boxplot(mapping = aes(x = subject, y = clout, fill = subject)) +
+    theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(),) +
+    labs(x = element_blank(), y = "Clout")
+```
+
+### Relationship Between Academic Subject and Analytic Thinking
+
+```{r}
+unit_3_joined_data  %>% 
+ ggplot() +
+    geom_boxplot(mapping = aes(x = subject, y = analytic, fill = subject)) +
+    theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(),) +
+    labs(x = element_blank(), y = "Analytical Thinking")
+```

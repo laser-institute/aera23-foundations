@@ -1,0 +1,110 @@
+---
+title: "Learning Analytics with Posit" 
+subtitle: "AERA 23 Short Course"
+author: "The LASER Team"
+format:
+  revealjs: 
+    slide-number: true
+    progress: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: img/LASERlogo_large.png
+    theme: [default, css/laser.scss]
+    footer: <a href=https://www.fi.ncsu.edu/projects/laser-institute>LASER Institute
+resources:
+  - demo.pdf
+---
+
+## Today's Agenda
+
+1. The Learning Analytics - Data Visualization (15 mins)
+
+2. Data Visualization and Communication Walkthrough (50 mins)
+
+3. Closing 
+
+# Data Visualization {background="#143156"}
+
+
+
+## Explore
+
+::: {.panel-tabset width="100%"}
+
+### Exploratory
+:::{.columns}
+:::{.column width="30%"}
+::: {.r-fit-text}
+
+
+- Data Visualization
+- Data Transformation
+    - Data Preprocessing (DP)
+    - Feature Engineering (FE)
+:::
+:::
+
+    
+:::{.column width="70%"}
+<img src="img/explore_phase.png" height="350px"/>
+    
+:::
+:::
+
+
+### Visualization 
+
+<img src="img/tidy.png" height="550px"/>
+
+
+
+
+### Transformation
+
+Feature engineering
+
+
+:::
+
+::: footer
+
+:::
+
+:::{.notes}
+EXPLORE PHASE
+This is essentially exploratory data analysis and this phase allows us to gain an understanding of the data such that we can figure out the course of actions and areas that we can to explore in the modeling phase. This entails the use of descriptive statistics and data visualizations. It is in an unstructured way to uncover initial patterns, characteristics, and points of interest. Data exploration is the art of looking at your data, rapidly generating hypotheses, quickly testing them, then repeating again and again and again. The goal of data exploration is to generate many promising leads that you can later explore in more depth
+
+VISUALIZATION
+One goal in this phase is explore questions that drive the original analysis
+and develop new questions and hypotheses to test in later stages. ggplot2, one of the core members of the tidyverse consists of a grammar of graphics to organize and make sense of  different elements (Wilkinson, 2005). 
+
+TRANSFORMATION
+DATA PREPROCESSING in the wrngling phase is usually about getting large volumes of data from the sources — databases, object stores, data lakes, etc — and performing basic data cleaning and data wrangling preparing them for the later part. TO explore the data here you may need to wrangle or preprocess the data further to get descriptive data
+
+FEATURE ENGINEERING is known as the process of transforming raw data (that has already been processed) into features that better represent the underlying problem to predictive models, resulting in improved model accuracy on unseen data.
+
+:::
+
+## Model
+
+::: {.panel-tabset}
+
+### panel A
+
+
+
+### panel B
+:::
+
+
+## Communicate
+
+::: {.panel-tabset}
+
+### panel A
+
+
+
+### panel B
+:::
