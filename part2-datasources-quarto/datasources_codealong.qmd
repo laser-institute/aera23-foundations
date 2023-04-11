@@ -15,7 +15,7 @@ resources:
   - demo.pdf
 ---
 
-## 1. Introduction
+## 0. Introduction
 
 We will explore different sources of data and work on combining these data sources.
 
