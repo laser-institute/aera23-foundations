@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="The LASER Team">
+<meta name="dcterms.date" content="2023-04-11">
+
+<title>Data Sources Code-Along</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="datasources_codealong_files/libs/clipboard/clipboard.min.js"></script>
+<script src="datasources_codealong_files/libs/quarto-html/quarto.js"></script>
+<script src="datasources_codealong_files/libs/quarto-html/popper.min.js"></script>
+<script src="datasources_codealong_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="datasources_codealong_files/libs/quarto-html/anchor.min.js"></script>
+<link href="datasources_codealong_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="datasources_codealong_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="datasources_codealong_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="datasources_codealong_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="datasources_codealong_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#prepare" id="toc-prepare" class="nav-link" data-scroll-target="#prepare">1. Prepare</a></li>
+  <li><a href="#wrangle" id="toc-wrangle" class="nav-link" data-scroll-target="#wrangle">2. Wrangle</a>
+  <ul class="collapse">
+  <li><a href="#a.-import-data" id="toc-a.-import-data" class="nav-link" data-scroll-target="#a.-import-data">a. Import Data</a></li>
+  <li><a href="#b.-tidy-data" id="toc-b.-tidy-data" class="nav-link" data-scroll-target="#b.-tidy-data">b. Tidy data</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Sources Code-Along</h1>
+<p class="subtitle lead">AERA 23 Short Course</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>The LASER Team </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 11, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<p>We will explore different sources of data and work on combining these data sources.</p>
+<p>Especially, in this session we will learn:</p>
+<ul>
+<li><p>how to prepare your data</p></li>
+<li><p>how to wrangle data</p></li>
+<li><p>how to join multiple data sources</p></li>
+</ul>
+</section>
+<section id="prepare" class="level2">
+<h2 class="anchored" data-anchor-id="prepare">1. Prepare</h2>
+<p>Firstly, we need to load necessary packages. The code chunk below shows two libraries: “Tidyverse” and “Here”.</p>
+<p>Tidyverse:The tidyverse is a collection of R packages designed for data manipulation, visualization, and analysis.</p>
+<p>Here: It provides a simple way to manage file paths in your R projects.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries below</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.0     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at /Users/cansu/Desktop/AERA_Work/aera23-foundations</code></pre>
+</div>
+</div>
+</section>
+<section id="wrangle" class="level2">
+<h2 class="anchored" data-anchor-id="wrangle">2. Wrangle</h2>
+<section id="a.-import-data" class="level3">
+<h3 class="anchored" data-anchor-id="a.-import-data">a. Import Data</h3>
+<section id="data-source-1-log-data" class="level4">
+<h4 class="anchored" data-anchor-id="data-source-1-log-data">Data Source #1: Log Data</h4>
+<p>Log-trace data is data generated from our interactions with digital technologies, such as archived data from social media postings. In education, an increasingly common source of log-trace data is that generated from interactions with LMS and other digital tools.</p>
+<p>The data we will use has already been “wrangled” quite a bit and is a summary type of log-trace data: the number of minutes students spent on the course. While this data type is fairly straightforward, there are even more complex sources of log-trace data out there (e.g., time stamps associated with when students started and stopped accessing the course).</p>
+<p>Let’s use the <code>read_csv()</code> function from {readr} to import our <code>log-data.csv</code> file directly from our data folder and name this data set <code>time_spent</code>, to help us to quickly recollect what function it serves in this analysis:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load with read_csv package</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>time_spent <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/log-data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 716 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (4): course_id, gender, enrollment_reason, enrollment_status
+dbl (2): student_id, time_spent
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Now let’s load it with the {here} package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load with here package</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>time_spent <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"part2-datasources-quarto/data"</span>, <span class="st">"log-data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 716 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (4): course_id, gender, enrollment_reason, enrollment_status
+dbl (2): student_id, time_spent
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#inspect data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>time_spent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 716 × 6
+   student_id course_id     gender enrollment_reason             enrol…¹ time_…²
+        &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                         &lt;chr&gt;     &lt;dbl&gt;
+ 1      60186 AnPhA-S116-01 M      Course Unavailable at Local … Approv…   2087.
+ 2      66693 AnPhA-S116-01 M      Course Unavailable at Local … Approv…   2309.
+ 3      66811 AnPhA-S116-01 F      Course Unavailable at Local … Approv…   5299.
+ 4      66862 AnPhA-S116-01 F      Course Unavailable at Local … Approv…   1747.
+ 5      67508 AnPhA-S116-01 F      Scheduling Conflict           Approv…   2668.
+ 6      70532 AnPhA-S116-01 F      Learning Preference of the S… Approv…   2938.
+ 7      77010 AnPhA-S116-01 F      Learning Preference of the S… Approv…   1533.
+ 8      85249 AnPhA-S116-01 F      Course Unavailable at Local … Approv…   1210.
+ 9      85411 AnPhA-S116-01 F      Scheduling Conflict           Approv…    473.
+10      85583 AnPhA-S116-01 F      Scheduling Conflict           Approv…   5532.
+# … with 706 more rows, and abbreviated variable names ¹​enrollment_status,
+#   ²​time_spent</code></pre>
+</div>
+</div>
+</section>
+<section id="data-source-2-academic-achievement-data" class="level4">
+<h4 class="anchored" data-anchor-id="data-source-2-academic-achievement-data">Data Source #2: Academic Achievement Data</h4>
+<p>We’ll load the data in the same way as earlier but take a quick peek but including the name of our data frame in the code chunk as well:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load data 2: Academic Achievement</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>gradebook <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"part2-datasources-quarto/data"</span>, <span class="st">"gradebook-summary.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 717 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): course_id
+dbl (3): student_id, total_points_possible, total_points_earned
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#inspect data with glimpse</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(gradebook)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 717
+Columns: 4
+$ student_id            &lt;dbl&gt; 43146, 44638, 47448, 47979, 48797, 51943, 52326,…
+$ course_id             &lt;chr&gt; "FrScA-S216-02", "OcnA-S116-01", "FrScA-S216-01"…
+$ total_points_possible &lt;dbl&gt; 1217, 1676, 1232, 1833, 2225, 1222, 1775, 2225, …
+$ total_points_earned   &lt;dbl&gt; 1150.00, 1384.23, 1116.00, 1492.73, 1994.75, 70.…</code></pre>
+</div>
+</div>
+</section>
+<section id="data-source-3-self-report-survey" class="level4">
+<h4 class="anchored" data-anchor-id="data-source-3-self-report-survey">Data Source #3: Self-Report Survey</h4>
+<p>The third data source is a self-report survey. This was data collected before the start of the course. The survey included ten items, each corresponding to one of three motivation measures: interest, utility value, and perceived competence. These were chosen for their alignment with one way to think about students’ motivation, to what extent they expect to do well (corresponding to their perceived competence) and their value for what they are learning (corresponding to their interest and utility value).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load data 3:Self-Report Survey</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"part2-datasources-quarto/data"</span>, <span class="st">"survey.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 662 Columns: 26
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr   (5): student_ID, course_ID, subject, semester, section
+dbl  (18): int, val, percomp, tv, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, p...
+dttm  (3): date.x, date.y, date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#inspect data with view</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(survey)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 26
+  studen…¹ cours…² subject semes…³ section   int   val percomp    tv    q1    q2
+  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 43146    FrScA-… FrScA   S216    02        4.2  3.67     4    3.86     4     4
+2 44638    OcnA-S… OcnA    S116    01        4    3        3    3.57     4     2
+3 47448    FrScA-… FrScA   S216    01        4.2  3        3    3.71     5     3
+4 47979    OcnA-S… OcnA    S216    01        4    3.67     2.5  3.86     4     3
+5 48797    PhysA-… PhysA   S116    01        3.8  3.67     3.5  3.71     4     4
+6 51943    FrScA-… FrScA   S216    03        3.8  3.67     3.5  3.71     4     4
+# … with 15 more variables: q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;,
+#   q8 &lt;dbl&gt;, q9 &lt;dbl&gt;, q10 &lt;dbl&gt;, date.x &lt;dttm&gt;, post_int &lt;dbl&gt;,
+#   post_uv &lt;dbl&gt;, post_tv &lt;dbl&gt;, post_percomp &lt;dbl&gt;, date.y &lt;dttm&gt;,
+#   date &lt;dttm&gt;, and abbreviated variable names ¹​student_ID, ²​course_ID,
+#   ³​semester</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(survey)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 26
+  studen…¹ cours…² subject semes…³ section   int   val percomp    tv    q1    q2
+  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 19       AnPhA-… AnPhA   S217    02        4.2  5        5    4.5      5     5
+2 42       FrScA-… FrScA   S217    01        4    4        4    4        4     4
+3 52       FrScA-… FrScA   S217    03        4.4  2.67     3.5  3.75     4     2
+4 57       FrScA-… FrScA   S217    01        4.4  2.33     2.5  3.62     5     2
+5 72       FrScA-… FrScA   S217    01        5    3        4    4.25     5     2
+6 80       FrScA-… FrScA   S217    01        3.6  2.33     3    3.12     4     2
+# … with 15 more variables: q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;,
+#   q8 &lt;dbl&gt;, q9 &lt;dbl&gt;, q10 &lt;dbl&gt;, date.x &lt;dttm&gt;, post_int &lt;dbl&gt;,
+#   post_uv &lt;dbl&gt;, post_tv &lt;dbl&gt;, post_percomp &lt;dbl&gt;, date.y &lt;dttm&gt;,
+#   date &lt;dttm&gt;, and abbreviated variable names ¹​student_ID, ²​course_ID,
+#   ³​semester</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="b.-tidy-data" class="level3">
+<h3 class="anchored" data-anchor-id="b.-tidy-data">b. Tidy data</h3>
+<section id="data-1-time-spent" class="level5">
+<h5 class="anchored" data-anchor-id="data-1-time-spent">Data 1: TIME SPENT</h5>
+<p>We will separate course_id variable in the time-spent.</p>
+<p>The <code>c()</code> function in R is used to get the output by giving parameters inside the function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>time_spent <span class="sc">%&gt;%</span>  </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(course_id,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">"subject"</span>, <span class="st">"semester"</span>, <span class="st">"section"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 716 × 8
+   student_id subject semester section gender enrollment_reason  enrol…¹ time_…²
+        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;              &lt;chr&gt;     &lt;dbl&gt;
+ 1      60186 AnPhA   S116     01      M      Course Unavailabl… Approv…   2087.
+ 2      66693 AnPhA   S116     01      M      Course Unavailabl… Approv…   2309.
+ 3      66811 AnPhA   S116     01      F      Course Unavailabl… Approv…   5299.
+ 4      66862 AnPhA   S116     01      F      Course Unavailabl… Approv…   1747.
+ 5      67508 AnPhA   S116     01      F      Scheduling Confli… Approv…   2668.
+ 6      70532 AnPhA   S116     01      F      Learning Preferen… Approv…   2938.
+ 7      77010 AnPhA   S116     01      F      Learning Preferen… Approv…   1533.
+ 8      85249 AnPhA   S116     01      F      Course Unavailabl… Approv…   1210.
+ 9      85411 AnPhA   S116     01      F      Scheduling Confli… Approv…    473.
+10      85583 AnPhA   S116     01      F      Scheduling Confli… Approv…   5532.
+# … with 706 more rows, and abbreviated variable names ¹​enrollment_status,
+#   ²​time_spent</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>time_spent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 716 × 6
+   student_id course_id     gender enrollment_reason             enrol…¹ time_…²
+        &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                         &lt;chr&gt;     &lt;dbl&gt;
+ 1      60186 AnPhA-S116-01 M      Course Unavailable at Local … Approv…   2087.
+ 2      66693 AnPhA-S116-01 M      Course Unavailable at Local … Approv…   2309.
+ 3      66811 AnPhA-S116-01 F      Course Unavailable at Local … Approv…   5299.
+ 4      66862 AnPhA-S116-01 F      Course Unavailable at Local … Approv…   1747.
+ 5      67508 AnPhA-S116-01 F      Scheduling Conflict           Approv…   2668.
+ 6      70532 AnPhA-S116-01 F      Learning Preference of the S… Approv…   2938.
+ 7      77010 AnPhA-S116-01 F      Learning Preference of the S… Approv…   1533.
+ 8      85249 AnPhA-S116-01 F      Course Unavailable at Local … Approv…   1210.
+ 9      85411 AnPhA-S116-01 F      Scheduling Conflict           Approv…    473.
+10      85583 AnPhA-S116-01 F      Scheduling Conflict           Approv…   5532.
+# … with 706 more rows, and abbreviated variable names ¹​enrollment_status,
+#   ²​time_spent</code></pre>
+</div>
+</div>
+<p>Create a new object with our new dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>time_spent_2 <span class="ot">&lt;-</span> time_spent <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(course_id,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">"subject"</span>, <span class="st">"semester"</span>, <span class="st">"section"</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>time_spent_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 716 × 8
+   student_id subject semester section gender enrollment_reason  enrol…¹ time_…²
+        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;              &lt;chr&gt;     &lt;dbl&gt;
+ 1      60186 AnPhA   S116     01      M      Course Unavailabl… Approv…   2087.
+ 2      66693 AnPhA   S116     01      M      Course Unavailabl… Approv…   2309.
+ 3      66811 AnPhA   S116     01      F      Course Unavailabl… Approv…   5299.
+ 4      66862 AnPhA   S116     01      F      Course Unavailabl… Approv…   1747.
+ 5      67508 AnPhA   S116     01      F      Scheduling Confli… Approv…   2668.
+ 6      70532 AnPhA   S116     01      F      Learning Preferen… Approv…   2938.
+ 7      77010 AnPhA   S116     01      F      Learning Preferen… Approv…   1533.
+ 8      85249 AnPhA   S116     01      F      Course Unavailabl… Approv…   1210.
+ 9      85411 AnPhA   S116     01      F      Scheduling Confli… Approv…    473.
+10      85583 AnPhA   S116     01      F      Scheduling Confli… Approv…   5532.
+# … with 706 more rows, and abbreviated variable names ¹​enrollment_status,
+#   ²​time_spent</code></pre>
+</div>
+</div>
+<p>As you can see from the dataset, time_spent variable is not set as hour. Let’s change that. For this, we will use “mutate()” function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mutate minutes to hours on time spent and save as new variable.</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>time_spent_2 <span class="ot">&lt;-</span> time_spent_2 <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time_spent_hours =</span> time_spent <span class="sc">/</span> <span class="dv">60</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>time_spent_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 716 × 9
+   student_id subject semester section gender enrollme…¹ enrol…² time_…³ time_…⁴
+        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+ 1      60186 AnPhA   S116     01      M      Course Un… Approv…   2087.   34.8 
+ 2      66693 AnPhA   S116     01      M      Course Un… Approv…   2309.   38.5 
+ 3      66811 AnPhA   S116     01      F      Course Un… Approv…   5299.   88.3 
+ 4      66862 AnPhA   S116     01      F      Course Un… Approv…   1747.   29.1 
+ 5      67508 AnPhA   S116     01      F      Schedulin… Approv…   2668.   44.5 
+ 6      70532 AnPhA   S116     01      F      Learning … Approv…   2938.   49.0 
+ 7      77010 AnPhA   S116     01      F      Learning … Approv…   1533.   25.6 
+ 8      85249 AnPhA   S116     01      F      Course Un… Approv…   1210.   20.2 
+ 9      85411 AnPhA   S116     01      F      Schedulin… Approv…    473.    7.88
+10      85583 AnPhA   S116     01      F      Schedulin… Approv…   5532.   92.2 
+# … with 706 more rows, and abbreviated variable names ¹​enrollment_reason,
+#   ²​enrollment_status, ³​time_spent, ⁴​time_spent_hours</code></pre>
+</div>
+</div>
+</section>
+<section id="data-2-gradebook" class="level5">
+<h5 class="anchored" data-anchor-id="data-2-gradebook">Data 2: GRADEBOOK</h5>
+<p>Now, we will work on the Gradebook dataset.Like the previous dataset, we will seperate course_id variable again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># separate the course_id variable</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>gradebook <span class="ot">&lt;-</span> gradebook <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(course_id, <span class="fu">c</span>(<span class="st">"subject"</span>, <span class="st">"semester"</span>, <span class="st">"section"</span>))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>gradebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 717 × 6
+   student_id subject semester section total_points_possible total_points_earned
+        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt;               &lt;dbl&gt;
+ 1      43146 FrScA   S216     02                       1217               1150 
+ 2      44638 OcnA    S116     01                       1676               1384.
+ 3      47448 FrScA   S216     01                       1232               1116 
+ 4      47979 OcnA    S216     01                       1833               1493.
+ 5      48797 PhysA   S116     01                       2225               1995.
+ 6      51943 FrScA   S216     03                       1222                 70 
+ 7      52326 AnPhA   S216     01                       1775               1519.
+ 8      52446 PhysA   S116     01                       2225               2198 
+ 9      53447 FrScA   S116     01                       1212               1173 
+10      53475 FrScA   S116     02                       1212                  0 
+# … with 707 more rows</code></pre>
+</div>
+</div>
+<p>We will create a new variable; proportion_earned.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mutate to a proportion, take total points earned divide by total points. Save as new variable proportion_earned.</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>gradebook <span class="ot">&lt;-</span> gradebook <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proportion_earned =</span> (total_points_earned <span class="sc">/</span> total_points_possible))</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#inspect data</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>gradebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 717 × 7
+   student_id subject semester section total_points_possible total_poi…¹ propo…²
+        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+ 1      43146 FrScA   S216     02                       1217       1150   0.945 
+ 2      44638 OcnA    S116     01                       1676       1384.  0.826 
+ 3      47448 FrScA   S216     01                       1232       1116   0.906 
+ 4      47979 OcnA    S216     01                       1833       1493.  0.814 
+ 5      48797 PhysA   S116     01                       2225       1995.  0.897 
+ 6      51943 FrScA   S216     03                       1222         70   0.0573
+ 7      52326 AnPhA   S216     01                       1775       1519.  0.855 
+ 8      52446 PhysA   S116     01                       2225       2198   0.988 
+ 9      53447 FrScA   S116     01                       1212       1173   0.968 
+10      53475 FrScA   S116     02                       1212          0   0     
+# … with 707 more rows, and abbreviated variable names ¹​total_points_earned,
+#   ²​proportion_earned</code></pre>
+</div>
+</div>
+</section>
+<section id="data-3-survey" class="level5">
+<h5 class="anchored" data-anchor-id="data-3-survey">Data 3: SURVEY</h5>
+<p>Now, we will work on third data source.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#inspect data </span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>survey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 662 × 26
+   stude…¹ cours…² subject semes…³ section   int   val percomp    tv    q1    q2
+   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 43146   FrScA-… FrScA   S216    02        4.2  3.67     4    3.86     4     4
+ 2 44638   OcnA-S… OcnA    S116    01        4    3        3    3.57     4     2
+ 3 47448   FrScA-… FrScA   S216    01        4.2  3        3    3.71     5     3
+ 4 47979   OcnA-S… OcnA    S216    01        4    3.67     2.5  3.86     4     3
+ 5 48797   PhysA-… PhysA   S116    01        3.8  3.67     3.5  3.71     4     4
+ 6 51943   FrScA-… FrScA   S216    03        3.8  3.67     3.5  3.71     4     4
+ 7 52326   AnPhA-… AnPhA   S216    01        3.6  4        3    4        4     4
+ 8 52446   PhysA-… PhysA   S116    01        4.2  3.67     3    4        4     4
+ 9 53447   FrScA-… FrScA   S116    01        3.8  2        3    3        5     2
+10 53475   FrScA-… FrScA   S216    01        4.8  3.33     4    4.14     5     4
+# … with 652 more rows, 15 more variables: q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;,
+#   q6 &lt;dbl&gt;, q7 &lt;dbl&gt;, q8 &lt;dbl&gt;, q9 &lt;dbl&gt;, q10 &lt;dbl&gt;, date.x &lt;dttm&gt;,
+#   post_int &lt;dbl&gt;, post_uv &lt;dbl&gt;, post_tv &lt;dbl&gt;, post_percomp &lt;dbl&gt;,
+#   date.y &lt;dttm&gt;, date &lt;dttm&gt;, and abbreviated variable names ¹​student_ID,
+#   ²​course_ID, ³​semester</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load janitor to clean variable names that do not match</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#clean column</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(survey)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#inspect data to check for consistency with other data</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>survey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 662 × 26
+   stude…¹ cours…² subject semes…³ section   int   val percomp    tv    q1    q2
+   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 43146   FrScA-… FrScA   S216    02        4.2  3.67     4    3.86     4     4
+ 2 44638   OcnA-S… OcnA    S116    01        4    3        3    3.57     4     2
+ 3 47448   FrScA-… FrScA   S216    01        4.2  3        3    3.71     5     3
+ 4 47979   OcnA-S… OcnA    S216    01        4    3.67     2.5  3.86     4     3
+ 5 48797   PhysA-… PhysA   S116    01        3.8  3.67     3.5  3.71     4     4
+ 6 51943   FrScA-… FrScA   S216    03        3.8  3.67     3.5  3.71     4     4
+ 7 52326   AnPhA-… AnPhA   S216    01        3.6  4        3    4        4     4
+ 8 52446   PhysA-… PhysA   S116    01        4.2  3.67     3    4        4     4
+ 9 53447   FrScA-… FrScA   S116    01        3.8  2        3    3        5     2
+10 53475   FrScA-… FrScA   S216    01        4.8  3.33     4    4.14     5     4
+# … with 652 more rows, 15 more variables: q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;,
+#   q6 &lt;dbl&gt;, q7 &lt;dbl&gt;, q8 &lt;dbl&gt;, q9 &lt;dbl&gt;, q10 &lt;dbl&gt;, date_x &lt;dttm&gt;,
+#   post_int &lt;dbl&gt;, post_uv &lt;dbl&gt;, post_tv &lt;dbl&gt;, post_percomp &lt;dbl&gt;,
+#   date_y &lt;dttm&gt;, date &lt;dttm&gt;, and abbreviated variable names ¹​student_id,
+#   ²​course_id, ³​semester</code></pre>
+</div>
+</div>
+</section>
+<section id="c.-join-data" class="level4">
+<h4 class="anchored" data-anchor-id="c.-join-data">C. Join Data</h4>
+<p>We will use “join()” function to combine datasets. To combine the dataset, we are using full_join.</p>
+<p>The full join returns all of the records in a new table, whether it matches on either the left or right tables. If the table rows match, then a join will be executed, otherwise it will return NULL in places where a matching row does not exist.</p>
+<p>When we are combining “gradebook” and “time_spent_2” datasets, we should identify column names. In this case, we will use “student_id”, “subject”, “semester”, and “section” for the match.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use single join to join data sets by student_id, subject, semester and section.</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>joined_data <span class="ot">&lt;-</span> <span class="fu">full_join</span>(gradebook, time_spent_2, </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"student_id"</span>, <span class="st">"subject"</span>, <span class="st">"semester"</span>, <span class="st">"section"</span>))</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>joined_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 830 × 12
+   student_id subject semester section total_po…¹ total…² propo…³ gender enrol…⁴
+        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  
+ 1      43146 FrScA   S216     02            1217   1150   0.945  F      Course…
+ 2      44638 OcnA    S116     01            1676   1384.  0.826  M      Course…
+ 3      47448 FrScA   S216     01            1232   1116   0.906  F      Other  
+ 4      47979 OcnA    S216     01            1833   1493.  0.814  M      Course…
+ 5      48797 PhysA   S116     01            2225   1995.  0.897  M      Learni…
+ 6      51943 FrScA   S216     03            1222     70   0.0573 M      Learni…
+ 7      52326 AnPhA   S216     01            1775   1519.  0.855  F      Other  
+ 8      52446 PhysA   S116     01            2225   2198   0.988  F      Learni…
+ 9      53447 FrScA   S116     01            1212   1173   0.968  F      Course…
+10      53475 FrScA   S116     02            1212      0   0      F      Course…
+# … with 820 more rows, 3 more variables: enrollment_status &lt;chr&gt;,
+#   time_spent &lt;dbl&gt;, time_spent_hours &lt;dbl&gt;, and abbreviated variable names
+#   ¹​total_points_possible, ²​total_points_earned, ³​proportion_earned,
+#   ⁴​enrollment_reason</code></pre>
+</div>
+</div>
+<p>As you can see, we have a new dataset, joined_data with 12 variables.Those variables came from the gradebook and time_spent_2 datasets.</p>
+<p>Let’s combine this new dataset with survey dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>data_to_explore  <span class="ot">&lt;-</span> <span class="fu">full_join</span>(joined_data, survey, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"student_id"</span>,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="st">"subject"</span>, <span class="st">"section"</span>))</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>data_to_explore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Datasets cannot be joined because the type of “student_id” is different. We need same types of variables to join the datasets. To turn a numerical variable into a character variable, we are using “as.character()” function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#mutate to change variable class from double or numeric to character</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>joined_data <span class="ot">&lt;-</span> joined_data <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">student_id =</span> <span class="fu">as.character</span>(student_id))</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co">#inspect data</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>joined_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 830 × 12
+   student_id subject semester section total_po…¹ total…² propo…³ gender enrol…⁴
+   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  
+ 1 43146      FrScA   S216     02            1217   1150   0.945  F      Course…
+ 2 44638      OcnA    S116     01            1676   1384.  0.826  M      Course…
+ 3 47448      FrScA   S216     01            1232   1116   0.906  F      Other  
+ 4 47979      OcnA    S216     01            1833   1493.  0.814  M      Course…
+ 5 48797      PhysA   S116     01            2225   1995.  0.897  M      Learni…
+ 6 51943      FrScA   S216     03            1222     70   0.0573 M      Learni…
+ 7 52326      AnPhA   S216     01            1775   1519.  0.855  F      Other  
+ 8 52446      PhysA   S116     01            2225   2198   0.988  F      Learni…
+ 9 53447      FrScA   S116     01            1212   1173   0.968  F      Course…
+10 53475      FrScA   S116     02            1212      0   0      F      Course…
+# … with 820 more rows, 3 more variables: enrollment_status &lt;chr&gt;,
+#   time_spent &lt;dbl&gt;, time_spent_hours &lt;dbl&gt;, and abbreviated variable names
+#   ¹​total_points_possible, ²​total_points_earned, ³​proportion_earned,
+#   ⁴​enrollment_reason</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#try again to together the grade_book and log_wrangled</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>data_to_explore <span class="ot">&lt;-</span> <span class="fu">full_join</span>(joined_data, survey, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"student_id"</span>, <span class="st">"subject"</span>, <span class="st">"semester"</span>, <span class="st">"section"</span>))</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>data_to_explore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 943 × 34
+   student_id subject semester section total_po…¹ total…² propo…³ gender enrol…⁴
+   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  
+ 1 43146      FrScA   S216     02            1217   1150   0.945  F      Course…
+ 2 44638      OcnA    S116     01            1676   1384.  0.826  M      Course…
+ 3 47448      FrScA   S216     01            1232   1116   0.906  F      Other  
+ 4 47979      OcnA    S216     01            1833   1493.  0.814  M      Course…
+ 5 48797      PhysA   S116     01            2225   1995.  0.897  M      Learni…
+ 6 51943      FrScA   S216     03            1222     70   0.0573 M      Learni…
+ 7 52326      AnPhA   S216     01            1775   1519.  0.855  F      Other  
+ 8 52446      PhysA   S116     01            2225   2198   0.988  F      Learni…
+ 9 53447      FrScA   S116     01            1212   1173   0.968  F      Course…
+10 53475      FrScA   S116     02            1212      0   0      F      Course…
+# … with 933 more rows, 25 more variables: enrollment_status &lt;chr&gt;,
+#   time_spent &lt;dbl&gt;, time_spent_hours &lt;dbl&gt;, course_id &lt;chr&gt;, int &lt;dbl&gt;,
+#   val &lt;dbl&gt;, percomp &lt;dbl&gt;, tv &lt;dbl&gt;, q1 &lt;dbl&gt;, q2 &lt;dbl&gt;, q3 &lt;dbl&gt;, q4 &lt;dbl&gt;,
+#   q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;, q8 &lt;dbl&gt;, q9 &lt;dbl&gt;, q10 &lt;dbl&gt;, date_x &lt;dttm&gt;,
+#   post_int &lt;dbl&gt;, post_uv &lt;dbl&gt;, post_tv &lt;dbl&gt;, post_percomp &lt;dbl&gt;,
+#   date_y &lt;dttm&gt;, date &lt;dttm&gt;, and abbreviated variable names
+#   ¹​total_points_possible, ²​total_points_earned, ³​proportion_earned, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write data to file to use later</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(data_to_explore, <span class="st">"data/data_to_explore.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

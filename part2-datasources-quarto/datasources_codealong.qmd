@@ -1,0 +1,239 @@
+---
+title: "Data Sources Code-Along" 
+subtitle: "AERA 23 Short Course"
+author: "The LASER Team"
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    theme: 
+      - united
+      - "css/quarto-laser-html.scss"
+resources:
+  - demo.pdf
+---
+
+## 1. Introduction
+
+We will explore different sources of data and work on combining these data sources.
+
+Especially, in this session we will learn:
+
+-   how to prepare your data
+
+-   how to wrangle data
+
+-   how to join multiple data sources
+
+## 1. Prepare
+
+Firstly, we need to load necessary packages. The code chunk below shows two libraries: "Tidyverse" and "Here".
+
+Tidyverse:The tidyverse is a collection of R packages designed for data manipulation, visualization, and analysis.
+
+Here: It provides a simple way to manage file paths in your R projects.
+
+```{r}
+# Load libraries below
+library(tidyverse)
+library(here)
+
+```
+
+## 2. Wrangle
+
+### a. Import Data
+
+#### Data Source #1: Log Data
+
+Log-trace data is data generated from our interactions with digital
+technologies, such as archived data from social media postings. In
+education, an increasingly common source of log-trace data is that
+generated from interactions with LMS and other digital tools.
+
+The data we will use has already been "wrangled" quite a bit and is a
+summary type of log-trace data: the number of minutes students spent on
+the course. While this data type is fairly straightforward, there are
+even more complex sources of log-trace data out there (e.g., time stamps
+associated with when students started and stopped accessing the course).
+
+Let's use the `read_csv()` function from {readr} to import our
+`log-data.csv` file directly from our data folder and name this data set
+`time_spent`, to help us to quickly recollect what function it serves in
+this analysis:
+
+```{r}
+#load with read_csv package
+time_spent <- read_csv("data/log-data.csv")
+
+```
+
+Now let's load it with the {here} package.
+
+```{r}
+#load with here package
+time_spent <- read_csv(here("part2-datasources-quarto/data", "log-data.csv"))
+
+#inspect data
+time_spent
+```
+#### Data Source #2: Academic Achievement Data
+We'll load the data in the same way as earlier but take a quick peek but
+including the name of our data frame in the code chunk as well:
+
+```{r}
+#load data 2: Academic Achievement
+gradebook <- read_csv(here("part2-datasources-quarto/data", "gradebook-summary.csv"))
+
+#inspect data with glimpse
+glimpse(gradebook)
+```
+#### Data Source #3: Self-Report Survey
+The third data source is a self-report survey. This was data collected
+before the start of the course. The survey included ten items, each
+corresponding to one of three motivation measures: interest, utility
+value, and perceived competence. These were chosen for their alignment
+with one way to think about students' motivation, to what extent they
+expect to do well (corresponding to their perceived competence) and
+their value for what they are learning (corresponding to their interest
+and utility value).
+
+```{r}
+#load data 3:Self-Report Survey
+survey <- read_csv(here("part2-datasources-quarto/data", "survey.csv"))
+
+#inspect data with view
+head(survey)
+tail(survey)
+```
+### b. Tidy data
+##### Data 1: TIME SPENT
+We will separate course_id variable in the time-spent. 
+
+The `c()` function in R is used to get the output by giving parameters
+inside the function.
+
+```{r}
+time_spent %>%  
+  separate(course_id,
+           c("subject", "semester", "section"))
+
+
+time_spent
+
+```
+Create a new object with our new dataset. 
+
+```{r}
+time_spent_2 <- time_spent %>%
+  separate(course_id,
+           c("subject", "semester", "section"))
+
+time_spent_2
+```
+As you can see from the dataset, time_spent variable is not set as hour. Let's
+change that. For this, we will use "mutate()" function. 
+
+```{r}
+# mutate minutes to hours on time spent and save as new variable.
+time_spent_2 <- time_spent_2 %>% 
+  mutate(time_spent_hours = time_spent / 60)
+time_spent_2
+```
+##### Data 2: GRADEBOOK
+Now, we will work on the Gradebook dataset.Like the previous dataset, we will
+seperate course_id variable again. 
+
+```{r}
+# separate the course_id variable
+gradebook <- gradebook %>% 
+  separate(course_id, c("subject", "semester", "section"))
+
+gradebook
+```
+We will create a new variable; proportion_earned. 
+
+```{r}
+# Mutate to a proportion, take total points earned divide by total points. Save as new variable proportion_earned.
+gradebook <- gradebook %>% 
+  mutate(proportion_earned = (total_points_earned / total_points_possible))
+
+#inspect data
+gradebook
+
+```
+##### Data 3: SURVEY
+Now, we will work on third data source. 
+
+```{r}
+#inspect data 
+survey
+
+# load janitor to clean variable names that do not match
+library(janitor)
+
+#clean column
+survey <- clean_names(survey)
+
+#inspect data to check for consistency with other data
+survey
+
+```
+#### C. Join Data
+
+We will use "join()" function to combine datasets. To combine the dataset, we 
+are using full_join. 
+
+The full join returns all of the records in a new table, whether it matches on 
+either the left or right tables. If the table rows match, then a join will be 
+executed, otherwise it will return NULL in places where a matching row does not 
+exist.
+
+When we are combining "gradebook" and "time_spent_2" datasets, we should identify
+column names. In this case, we will use "student_id", "subject", "semester", and
+"section" for the match. 
+
+```{r}
+# use single join to join data sets by student_id, subject, semester and section.
+joined_data <- full_join(gradebook, time_spent_2, 
+                         by = c("student_id", "subject", "semester", "section"))
+
+joined_data
+```
+As you can see, we have a new dataset, joined_data with 12 variables.Those variables came from the gradebook and time_spent_2 datasets. 
+
+Let's combine this new dataset with survey dataset. 
+
+```{r eval = FALSE}
+data_to_explore  <- full_join(joined_data, survey, by = c("student_id",
+"subject", "section"))
+data_to_explore
+```
+Datasets cannot be joined because the type of "student_id" is different. We need
+same types of variables to join the datasets. To turn a numerical variable into
+a character variable, we are using "as.character()" function. 
+
+```{r}
+#mutate to change variable class from double or numeric to character
+joined_data <- joined_data %>%
+  mutate(student_id = as.character(student_id))
+
+#inspect data
+joined_data
+
+#try again to together the grade_book and log_wrangled
+data_to_explore <- full_join(joined_data, survey, by = c("student_id", "subject", "semester", "section"))
+
+# inspect data
+data_to_explore
+
+# write data to file to use later
+write_csv(data_to_explore, "data/data_to_explore.csv")
+
+```
+
+
+
+
