@@ -1,6 +1,7 @@
 ---
-title: "data_viz codealong"
-author: "The Laser Team"
+title: "Data Viz codealong"
+subtitle: "AERA 23 Short Course"
+author: "The LASER Team"
 execute:
   echo: true
   message: false
@@ -10,7 +11,9 @@ format:
     toc: true
     toc-location: left
     number-sections: false
-    theme: journal
+    theme: 
+      - united
+      - "css/quarto-laser-html.scss"
     code-fold: true
 editor: visual
 ---
@@ -83,9 +86,9 @@ data_to_viz %>%
 
 ## 3. Explore
 
-#### ggplot grammar - with layers
+#### GGplot grammar - with layers
 
-ggplot2 is designed to work iteratively. You start with a layer that shows the raw data. Then you add layers of annotations and statistical summaries.
+GGplot is designed to work iteratively. You start with a layer that shows the raw data. Then you add layers of annotations and statistical summaries.
 
 You can read more about ggplot in the book ["GGPLOT: Elegant Graphics for Data Analysis"](https://ggplot2-book.org/introduction.html). You can also find lots of inspiration in the [r-graph gallery](https://r-graph-gallery.com/) that includes code.
 
@@ -338,8 +341,7 @@ data_to_viz %>%
 
 ##### Linear Regression
 
-In brief, a linear regression model involves
-estimating the relationships between one or more *independent variables* with one dependent variable. Mathematically, it can be written like the following.
+In brief, a linear regression model involves estimating the relationships between one or more *independent variables* with one dependent variable. Mathematically, it can be written like the following.
 
 $$
 \operatorname{dependentvar} = \beta_{0} + \beta_{1}(\operatorname{independentvar}) + \epsilon
@@ -356,8 +358,7 @@ lm(proportion_earned ~ time_spent_hours,
 
 Note that that estimate for time spent is .005, so for every one-unit increase in `time_spent_hours`, we should expect a 5 percentage point increase in their grade.
 
-Plot the linear model with: 
-`geom_smooth` function and method = "lm" which fits a linear model, giving the line of best fit.
+Plot the linear model with: `geom_smooth` function and method = "lm" which fits a linear model, giving the line of best fit.
 
 ```{r}
 data_to_viz %>%
@@ -374,8 +375,8 @@ data_to_viz %>%
   facet_wrap(~ subject) 
 ```
 
-
 ##### Multiple regression
+
 We can add another variable for science interest called `int` varibale.
 
 ```{r messages=FALSE, warning=FALSE}
@@ -384,11 +385,9 @@ lm(proportion_earned ~ time_spent_hours + int,
    data = data_to_viz)
 ```
 
-
 We can see that the intercept is now estimated at 0.44, which tells us that when students' time spent and interest are equal to zero, they are likely fail the course unsurprisingly. Note that that estimate for interest in science is .046, so for every one-unit increase in `int`, we should expect an 5 percentage point increase in their grade.
 
-We can save the output of the function to an object---let's say
-`m1`, standing for model 1. We can then use the `summary()` function built into R to view a much more feature-rich summary of the estimated model.
+We can save the output of the function to an object---let's say `m1`, standing for model 1. We can then use the `summary()` function built into R to view a much more feature-rich summary of the estimated model.
 
 ```{r messages=FALSE, warning=FALSE}
 # save the model
@@ -397,6 +396,7 @@ m1 <- lm(proportion_earned ~ time_spent_hours + int, data = data_to_viz)
 ```
 
 Run a summary model for the model you just created called, `m1.`
+
 ```{r messages=FALSE, warning=FALSE}
 #run the summary
 summary(m1)
@@ -404,8 +404,8 @@ summary(m1)
 ```
 
 ##### Summarize predictors
-the `summarize()` function from the {dplyr}
-package used to create summary statistics such as the mean, standard deviation, or the minimum or maximum of a value. At its core, think of `summarize()` as a function that returns a single value (whether it's a mean, median, standard deviation---whichever!) that summarizes a single column.
+
+the `summarize()` function from the {dplyr} package used to create summary statistics such as the mean, standard deviation, or the minimum or maximum of a value. At its core, think of `summarize()` as a function that returns a single value (whether it's a mean, median, standard deviation---whichever!) that summarizes a single column.
 
 ```{r messages=FALSE, warning=FALSE}
 data_to_viz %>% 
@@ -413,20 +413,14 @@ data_to_viz %>%
             mean_time = mean(time_spent_hours, na.rm = TRUE))
 ```
 
-The mean value for interest is quite high. If we multiply the estimate relationship between interest and proportion of points
-earned---0.046---by this, the mean interest across all of the
-students---we can determine that students' estimate final grade was 0.046 X 4.3, or **0.197**. For hours spent spent, the average students' estimate final grade was 0.0042 X 30.48, or **0.128**.
+The mean value for interest is quite high. If we multiply the estimate relationship between interest and proportion of points earned---0.046---by this, the mean interest across all of the students---we can determine that students' estimate final grade was 0.046 X 4.3, or **0.197**. For hours spent spent, the average students' estimate final grade was 0.0042 X 30.48, or **0.128**.
 
 If we add both 0.197 and 0.128 to the intercept, 0.449, that equals 0.774, or about 77%. In other words, a student with average interest in science who spent an average amount of time in the course earned a pretty average grade.
 
-
 ## 5. Communicate
-
-
 
 We are going to pick 2 graph and tell a story in a flex dashboard.
 
 We need to open 'flexdashboard_template' file.
 
 We also have a 'flexdashboard_example' file.
-
