@@ -40,13 +40,16 @@ In the code chunk below, we will:
 4.  View the data
 
 ```{r}
-# Load libraries below
+# Load tidyverse library by adding the package name
 library(tidyverse)
+# Load here library by adding the correct function
 library(here)
 
 
 # Read in data
 data_to_viz <- read_csv(here("part3-dataviz-quarto", "data", "data_to_explore.csv"))
+
+# visualize the data using a method of your choice
 
 ```
 
@@ -58,13 +61,13 @@ This output is best for internal use.
 
 This is because the output is rich, but not well-suited to exporting to a table that you add, for instance, to a Google Docs or Microsoft Word manuscript. Of course, these values can be entered manually into a table, but we'll also discuss ways later on to create tables that are ready, or nearly-ready-to be added directly to manuscripts.
 
-First, install and load the package. Normally you would do this above but we want to make sure you know which packages aer used with the new functions.
+First, install and load the package. Normally you would do this above but we want to make sure you know which packages are used with the new functions.
 
 ```{r}
 #install package if this is first time using skimr copy the code below without the hashtag and run in the console
 #install.packages("skimr")
 
-#load library
+#load library by adding skimr as the package name
 library(skimr)
 
 ```
@@ -72,11 +75,11 @@ library(skimr)
 Second, use the `skim()` function to view the data
 
 ```{r}
-#skim data
+#skim the data by adding the skim function infront of the data
 skim(data_to_viz)
 ```
 
-Or, skim by a group such as the `subject` variable
+you can also skim by a group such as the `subject` variable
 
 ```{r}
 data_to_viz %>%
@@ -90,7 +93,7 @@ data_to_viz %>%
 
 GGplot is designed to work iteratively. You start with a layer that shows the raw data. Then you add layers of annotations and statistical summaries.
 
-You can read more about ggplot in the book ["GGPLOT: Elegant Graphics for Data Analysis"](https://ggplot2-book.org/introduction.html). You can also find lots of inspiration in the [r-graph gallery](https://r-graph-gallery.com/) that includes code.
+You can read more about ggplot in the book ["GGPLOT: Elegant Graphics for Data Analysis"](https://ggplot2-book.org/introduction.html). You can also find lots of inspiration in the [r-graph gallery](https://r-graph-gallery.com/) that includes code. Finally you can use the GGPLOT cheat sheet to help.
 
 ![](img/grammar.png){width="600"}
 
@@ -110,31 +113,35 @@ Create a basic visualization that examines a continuous variable of interest.
 
 #### Which online course had the largest enrollment numbers?
 
+Which variable should we be looking at?
+
+```{r}
+#look at the data frame
+
+```
+
 #### Level a. The most basic level for a plot
 
 Includes:
 
--   data: data_to_explore.csv
--   `aes()` function - one continuous variables
+-   **data**: data_to_explore.csv
+-   \***`aes()` function** - one continuous variable:
     -   subject mapped to x position
--   `geom_bar()` function - bar graph
+-   **Geom**:`geom_bar()` function - bar graph
 
 ```{r}
 #layer 1: add data 
 # layer 2: add aesthetics mapping
-ggplot(data_to_viz, aes(x = subject)) +
+#ggplot(data_to_viz, aes(x = subject)) +
 #layer 3: add geom 
-  geom_bar() +
+#  geom_bar() +
 
-#layer 3: add labels
-    labs(title = "Number of Student Enrollments per Subject",
-       caption = "Which online courses have had the largest enrollment numbers?")
 ```
 
-#### Level b. Add another layer with labs
+#### Level b. Add another layer with labels
 
--   title: "Number of Student Enrollments per Subject"
--   caption: "Which online courses have had the largest enrollment numbers?"
+-   **title**: "Number of Student Enrollments per Subject"
+-   **caption**: "Which online courses have had the largest enrollment numbers?"
 
 ```{r}
 #layer 1: add data 
@@ -149,6 +156,8 @@ ggplot(data_to_viz, aes(x = subject)) +
 ```
 
 #### Level c: Add **Scale** with a different color.
+
+-   **scale**: fill = gender
 
 ##### What can we notice about gender?
 
@@ -165,20 +174,25 @@ ggplot(data_to_viz, aes(x = subject, fill = gender)) +
 
 ```
 
-#### Histogram
+#### Histogram - You try
 
--   data: data_to_viz
--   `aes()` function - one continuous variables
+-   **data**: data_to_viz
+-   **`aes()` function** - one continuous variables:
     -   `tv` variable mapped to x position
--   geom_histogram() \* this is already there
--   Add a title ""Number of Hours Students Watch TV per Day"
--   Add a caption that poses the question "Approximately how many students watch 4+ hours of TV per day?"
+-   **Geom**: geom_histogram() *this code is already there you just need to un-comment it.*
+-   Add a **title** ""Number of Hours Students Watch TV per Day"
+-   Add a **caption** that poses the question "Approximately how many students watch 4+ hours of TV per day?"
+
+**NEED HELP? [TRY STHDA](http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization)**
 
 ```{r}
 #add data
 
 # add the geom
+
+#add geom
 #geom_histogram(bins = 5) +
+
 #add the labs
 
 
@@ -217,15 +231,15 @@ Create a basic visualization that examines the relationship between two categori
 
 #### Heatmap
 
--   data: data_to_viz
+-   \***data**: data_to_viz
 -   use `count()` function for `subject`, `enrollment` then,
 -   `ggplot()` function
--   `aes()` function - one continuous variables
+-   **`aes()` function** - one continuous variables
     -   `subject` variable mapped to x position
     -   `enrollment reason` variable mapped to x position
--   `geom_tile()` function
--   Add a title "Reasons for Enrollment by Subject"
--   Add a caption that poses the question "Which subjects were the least available at local schools?"
+-   **Geom**: `geom_tile()` function
+-   Add a **title** "Reasons for Enrollment by Subject"
+-   Add a \***caption** that poses the question "Which subjects were the least available at local schools?"
 
 ```{r}
 data_to_viz %>% 
@@ -246,15 +260,22 @@ Create a basic visualization that examines the relationship between two continuo
 
 ##### Can we predict the grade on a course from the time spent in the course LMS?
 
+Which variables should we be looking at?
+
+```{r}
+#look at the data frame
+
+```
+
 #### Level a. The most basic level for a plot
 
 Includes:
 
--   data: data_to_explore.csv
--   `aes()` function - two continuous variables
+-   **data**: data_to_explore.csv
+-   **`aes()` function** - two continuous variables
     -   time spent in hours mapped to x position
     -   proportion earned mapped to y position
--   `geom_point()` function - Scatter plot
+-   **Geom**: `geom_point()` function - Scatter plot
 
 ```{r}
 #layer 1: add data and aesthetics mapping 
@@ -265,25 +286,11 @@ ggplot(data_to_viz,
   geom_point() 
 ```
 
-#### Level b. Add **Scale** with a different color.
+#### Level b. Add another layer with labels
 
-##### Can we notice anything about enrollment status?
-
-```{r}
-#layer 1: add data and aesthetics mapping 
-#layer 3: add color scale by type
-ggplot(data_to_viz, 
-       aes(x = time_spent_hours, 
-           y = proportion_earned,
-           color = enrollment_status)) + 
-#layer 2: +  geom function type
-  geom_point()
-```
-
-#### Level c. Add another layer with labs
-
--   labeling the title
--   labeling x and y axis
+-   Add a **title**: "How Time Spent on Course LMS is Related to Points Earned in the course"
+-   Add a **x label**: "Time Spent (Hours)"
+-   Add a **y label**: "Proportion of Points Earned"
 
 ```{r}
 #layer 1: add data and aesthetics mapping 
@@ -300,7 +307,30 @@ ggplot(data_to_viz,
        y = "Proportion of Points Earned")
 ```
 
+#### Level c. Add **Scale** with a different color.
+
+##### Can we notice anything about enrollment status?
+
+-   Add **scale**: color = enrollment_status
+
+```{r}
+#layer 1: add data and aesthetics mapping 
+#layer 4: add color scale by type
+ggplot(data_to_viz, 
+       aes(x = time_spent_hours, 
+           y = proportion_earned,
+           color = enrollment_status)) +
+#layer 2: +  geom function type
+  geom_point() +
+#layer 3: add labels
+  labs(title="How Time Spent on Course LMS is Related to Points Earned in the course", 
+       x="Time Spent (Hours)", 
+       y = "Proportion of Points Earned")
+```
+
 #### Level d. Divide up graphs using facet to visualize by subject.
+
+-   Add **facet** with facet_wrap() function: by subject
 
 ```{r}
 #layer 1: add data and aesthetics mapping 
@@ -318,9 +348,9 @@ ggplot(data_to_viz, aes(x = time_spent_hours, y = proportion_earned, color = enr
 
 #### Level e. How can we remove NA's from plot? and What will the code look like without the comments?
 
--   use dataframe then,
+-   use \***data** then,
 -   use `drop_na` function to remove na's from enrollment status then,
--   add `ggplot` function
+-   add `ggplot` function like above
 
 ```{r}
 data_to_viz %>%
@@ -424,3 +454,13 @@ We are going to pick 2 graph and tell a story in a flex dashboard.
 We need to open 'flexdashboard_template' file.
 
 We also have a 'flexdashboard_example' file.
+
+RESOURCES:
+
+[GGPLOT cheat sheet](http://r-statistics.co/ggplot2-cheatsheet.html) by r-statistics.co **by Selva Prabhakaran**
+
+[GGPLOT::CHEAT SHEET](https://statsandr.com/blog/files/ggplot2-cheatsheet.pdf)
+
+[STHDA statistics](http://sthda.com/english/)
+
+[STHDA GGPLOT](http://sthda.com/english/wiki/ggplot2-essentials) Basics
