@@ -354,7 +354,7 @@ The LASER Team
 <section id="explore" class="slide level2">
 <h2>Explore</h2>
 <div class="panel-tabset" width="100%">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Exploratory</a></li><li><a href="#tabset-1-2">Visualization</a></li><li><a href="#tabset-1-3">Transformation</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Exploratory</a></li><li><a href="#tabset-1-2">Visualization</a></li></ul>
 <div class="tab-content" width="100%">
 <div id="tabset-1-1">
 <div class="columns">
@@ -377,9 +377,6 @@ The LASER Team
 <div id="tabset-1-2">
 <p><img src="img/tidy.png" height="550px"></p>
 </div>
-<div id="tabset-1-3">
-<p>Feature engineering</p>
-</div>
 </div>
 </div>
 <div class="footer">
@@ -388,7 +385,7 @@ The LASER Team
 <aside class="notes">
 <p>EXPLORE PHASE This is essentially exploratory data analysis and this phase allows us to gain an understanding of the data such that we can figure out the course of actions and areas that we can to explore in the modeling phase. This entails the use of descriptive statistics and data visualizations. It is in an unstructured way to uncover initial patterns, characteristics, and points of interest. Data exploration is the art of looking at your data, rapidly generating hypotheses, quickly testing them, then repeating again and again and again. The goal of data exploration is to generate many promising leads that you can later explore in more depth</p>
 <p>VISUALIZATION One goal in this phase is explore questions that drive the original analysis and develop new questions and hypotheses to test in later stages. ggplot2, one of the core members of the tidyverse consists of a grammar of graphics to organize and make sense of different elements (Wilkinson, 2005).</p>
-<p>TRANSFORMATION DATA PREPROCESSING in the wrngling phase is usually about getting large volumes of data from the sources — databases, object stores, data lakes, etc — and performing basic data cleaning and data wrangling preparing them for the later part. TO explore the data here you may need to wrangle or preprocess the data further to get descriptive data</p>
+<p>TRANSFORMATION DATA PREPROCESSING in the wrangling phase is usually about getting large volumes of data from the sources — databases, object stores, data lakes, etc — and performing basic data cleaning and data wrangling preparing them for the later part. TO explore the data here you may need to wrangle or preprocess the data further to get descriptive data</p>
 <p>FEATURE ENGINEERING is known as the process of transforming raw data (that has already been processed) into features that better represent the underlying problem to predictive models, resulting in improved model accuracy on unseen data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -402,33 +399,119 @@ The LASER Team
           display:block!important;
       }</style></aside>
 </section>
-<section id="model" class="slide level2">
-<h2>Model</h2>
+<section id="data-viz-rules" class="slide level2">
+<h2>Data Viz rules</h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">panel A</a></li><li><a href="#tabset-2-2">panel B</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Rule 1</a></li><li><a href="#tabset-2-2">Rule 2</a></li><li><a href="#tabset-2-3">Rule 3</a></li><li><a href="#tabset-2-4">Rule 4</a></li><li><a href="#tabset-2-5">Rule 5</a></li><li><a href="#tabset-2-6">Rule 6</a></li><li><a href="#tabset-2-7">Rule 7</a></li><li><a href="#tabset-2-8">Rule 8</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-
+<p><img src="img/rule1.png" height="400px"></p>
 </div>
 <div id="tabset-2-2">
+<p><img src="img/rule2.png" height="400px"></p>
+</div>
+<div id="tabset-2-3">
+<p><img src="img/rule3.png" height="400px"></p>
+</div>
+<div id="tabset-2-4">
+<p><img src="img/rule4.png" height="400px"> ]</p>
+</div>
+<div id="tabset-2-5">
+<p><img src="img/rule5.png" height="400px"></p>
+</div>
+<div id="tabset-2-6">
+<p><img src="img/rule6.png" height="400px"></p>
+</div>
+<div id="tabset-2-7">
+<p><img src="img/rule7.png" height="400px"></p>
+</div>
+<div id="tabset-2-8">
+<p><img src="img/rule8.png" height="400px"></p>
+</div>
+</div>
+</div>
+<div class="footer">
 
 </div>
-</div>
-</div>
+<aside class="notes">
+<p>From https://towardsdatascience.com/8-rules-for-optimal-use-of-color-in-data-visualization-b283ae1fc1e2</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="communicate" class="slide level2">
 <h2>Communicate</h2>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">panel A</a></li><li><a href="#tabset-3-2">panel B</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Presentation</a></li><li><a href="#tabset-3-2">Citations &amp; Bibliography</a></li><li><a href="#tabset-3-3">Dashboard</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-
+<ul>
+<li>Built in formats
+<ul>
+<li>HTML presentation with ioslides <code>ioslides_presentation</code></li>
+<li>HTML presentation with W3C Slidy <code>slidy_presentation</code></li>
+<li>HTML presentation <a href="https://laser-institute.github.io/foundational-skills/foundation_lab_1/index.html#1"><code>xarnigan_presentation</code></a></li>
+<li>PDF presentation with LaTeX Beamer <a href="https://github.com/laser-institute/foundational-skills/blob/master/foundation_lab_4/final_pdf.pdf"><code>beamer_presentation</code></a> ]</li>
+</ul></li>
+</ul>
 </div>
 <div id="tabset-3-2">
+<ul>
+<li>Specify a <a href="https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html">bibliography file</a>.
+<ul>
+<li>ie: bibliography: rmarkdown.bib</li>
+</ul></li>
+<li>use @ and the citation identifier
+<ul>
+<li>Facts from articles <span class="citation" data-cites="smith04 doe99">[@smith04; @doe99]</span></li>
+</ul></li>
+<li>Change style with citation style language (CSL)
+<ul>
+<li>csl: apa.csl</li>
+</ul></li>
+</ul>
+</div>
+<div id="tabset-3-3">
+<ul>
+<li>Interactive apps 🡪 <a href="https://shiny.rstudio.com/gallery">Shiny package</a></li>
+<li><a href="https://rstudio.github.io/flexdashboard/articles/examples.html">Flex Dashboards in R</a></li>
+<li><a href="http://bit.ly/RMarkdownWebsites">Websites</a></li>
+<li>Books 🡪 [bookdown] package(https://bookdown.org/)</li>
+<li>Themed documents 🡪 <a href="https://prettydoc.statr.me/themes.html">prettydoc package</a></li>
+<li>Articles formatted for specific journals 🡪 <a href="https://bookdown.org/yihui/rmarkdown/rticles-templates.html">rticles package</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="footer">
 
 </div>
-</div>
-</div>
+<aside class="notes">
+<p>COMMUNICATE <strong>Presentations TAB</strong> There are also a number of ways to create presentations in R markdown and I’ve shared just a few options here.and again I’m going to refer you to the Wickham and Grolemund text because they list some other packages for presentations in R. Just as kind of background information, if you’re using some of these packages listed here to create presentations there’s some basic formatting that provides structure to the presentation. So for example, new slides begin at hashes, and then you can add a horizontal rule (by adding the three asterisks) and that’s going to create a slide without a header.</p>
+<p><strong>Citations &amp; Bibliography TAB</strong> Another really relevant form of output that you might want to create is a bibliography. That’s very necessary if you are producing scholarship, and so we wanted to talk briefly about how you would include a bibliography and citations. So Pandoc is actually the package that helps translate your R markdown file into your final report. And so Pandoc can generate citations and a bibliography for you.</p>
+<p>The way that you’re going to do that is you’re going to specify a bibliography file in your file’s YAML header. And you want to make sure to include the path from the directory of your R markdown file to the directory of your bibliography file, if they’re not the same. One thing that they note in the R for Data Science book is that this command will print your bibliography but it typically does not print any sort of header, so one of the last things that you should include in your Rmarkdown file is a header, so for example # (because the hashtag remember is going to indicate that it’s a header), and then the word “references” or “bibliography”.</p>
+<p>Typically you’ll also need to add citations within the text document, or in-text citations. And the way that you’re going to do that is to use the @ symbol and then the citation identifier, and I’ve given you an example here on the slide.</p>
+<p>Lastly, you can change the style of your citations and your bibliography with a citation style language or CSL command in the YAML header. So here I’ve given you an example for how you would set that citation style to APA. And I’ve given you some other references about citations and linking different citation managers with R a bit later in this presentation.</p>
+<p><em>OTHER tab</em> Given our time constraints today we don’t have time to talk about everything that R markdown can do. Not by any means. But I did just want to let you know that there are other output formats that R markdown is capable of and I’ve listed them here. And you can feel free to do investigation on your own to learn more if you’re interested. The one that I wanted to mention specifically though, was the rticles package because if you are engaged in scholarship and you’re trying to get your scholarship published this could be very helpful. The rticles package allows you to format articles for specific journals. So, if you are fairly advanced in your R markdown skills, and some of the information presented in this module is old hat for you, one of your afternoon activities today could be exploring the rticles package a little bit more.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 <img src="img/LASERlogo_large.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://www.fi.ncsu.edu/projects/laser-institute">LASER Institute</a></p><a href="https://www.fi.ncsu.edu/projects/laser-institute">

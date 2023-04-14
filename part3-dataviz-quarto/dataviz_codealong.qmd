@@ -52,7 +52,7 @@ data_to_viz <- read_csv(here("part3-dataviz-quarto", "data", "data_to_explore.cs
 
 ## 2. Wrangle
 
-We've already wrangled out data - but let's look at the data frame to make sure it is still correct. A quick way to look at the dataframe is with the [`skimr` package](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html).
+We've already wrangled out data - but let's look at the data frame to make sure it is still correct. A quick way to look at the data frame is with the [`skimr` package](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html).
 
 This output is best for internal use.
 
