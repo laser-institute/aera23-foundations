@@ -21,7 +21,7 @@ resources:
 
 ## Today's Agenda
 
-1. Intro and Icebreaker (20 mins)
+1. Intro and All about LASER (20 mins)
 
 2. The Learning Analytics Workflow (10 mins)
 
@@ -30,9 +30,9 @@ resources:
 4. Break before Part 2 on Data Sources (10 mins)
 
 
-## ICEBREAKER
+## ALL about LASER
 
-<img src="img/icebreaker.png" height="425px"/>
+<img src="img/LASERIcon.png" height="425px"/>
 
 
 # Learning Analytics Workflow {background="#143156"}
